@@ -147,13 +147,13 @@ export default function Header({ loginData }: any) {
               display="flex"
               alignItems="center"
               justifyContent="center"
-              width="220px"
+              width="150px"
             >
               {/* <FactCheckIcon
                                     color="primary"
                                     sx={{ height: '15px', width: '15px', marginRight: '5px' }}
                                 /> */}
-              <Typography color={"black"} variant="h3">
+              <Typography color={"black"} variant="h4">
                 Munchi
               </Typography>
             </Box>
