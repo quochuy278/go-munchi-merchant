@@ -7,13 +7,16 @@ import { SettingPage } from "./pages/SettingPage";
 import ErrorPage from "./pages/ErrorPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 function App() {
   return (
     <Routes>
-      <Route element={<Layout />}>
-        <Route path="/setting" element={<SettingPage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+      <Route element={<ProtectedRoutes isAuthenticated={true} />}>
+        <Route element={<Layout />}>
+          <Route path="/setting" element={<SettingPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Route>
       </Route>
       <Route path="/signin" element={<LoginPage />} />
       <Route path="/*" element={<ErrorPage />} />

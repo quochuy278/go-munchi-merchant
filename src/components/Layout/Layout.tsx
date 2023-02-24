@@ -5,9 +5,9 @@ import styles from "./layout.module.css";
 import { Outlet } from "react-router-dom";
 export const Layout = ({ children }: any) => {
   return (
-    <div>
+    <div className={styles.app__container}>
       <Header />
-      <main className={styles.main__content}>
+      <main >
         <Outlet />
       </main>
       {/* <Footer /> */}
