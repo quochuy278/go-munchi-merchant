@@ -9,6 +9,11 @@ const setSessionState = async (value: any) => {
   });
 };
 
+const addSessionState = async (value: any) => {
+  const currentValue = await getSessionState();
+  setSessionState({ ...currentValue, ...value });
+};
+
 const getSessionState = async () => {
   const { value } = await Preferences.get({
     key: PREFERENCE_SESSION_STATE_KEY,
@@ -20,4 +25,4 @@ const clearSessionState = async () => {
   await Preferences.remove({ key: PREFERENCE_SESSION_STATE_KEY });
 };
 
-export { setSessionState, getSessionState, clearSessionState };
+export { setSessionState, getSessionState, clearSessionState, addSessionState };
