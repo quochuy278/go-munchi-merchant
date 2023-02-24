@@ -15,8 +15,21 @@ import React, { useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { setSessionState } from '../utils/preference';
+
+
 const LoginForm = () => {
   const [show, setShow] = useState(false);
+
+  const handleLogin = async () => {
+    const sessionState = {
+      user: 'Huy Bui',
+      business: "Huy Dau Bui"
+    };
+    console.log('set session state', sessionState);
+    await setSessionState(sessionState);
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -65,7 +78,7 @@ const LoginForm = () => {
             label="Remember me"
           />
           <Button
-            type="submit"
+            onClick={handleLogin}
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
