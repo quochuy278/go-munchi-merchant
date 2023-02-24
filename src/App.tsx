@@ -1,27 +1,23 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Layout } from "./components/Layout/Layout";
-
+import { Routes, Route } from "react-router-dom";
+import { ProfilePage } from "./pages/ProfilePage";
+import { SettingPage } from "./pages/SettingPage";
+import ErrorPage from "./pages/ErrorPage";
+import { HomePage } from "./pages/HomePage";
+import { LoginPage } from "./pages/LoginPage";
 function App() {
   return (
-    <Layout>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    </Layout>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/setting" element={<SettingPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Route>
+      <Route path="/signin" element={<LoginPage />} />
+      <Route path="/*" element={<ErrorPage />} />
+    </Routes>
   );
 }
 
