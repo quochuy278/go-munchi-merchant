@@ -1,7 +1,11 @@
-import React from 'react'
+import React from "react";
+import CenterContainer from "../components/Container/CenterContainer";
 
 export const HomePage = () => {
+  console.log("This is home page");
   return (
-    <div>This HomePage</div>
-  )
-}
+    <CenterContainer>
+      <div>This HomePage</div>
+    </CenterContainer>
+  );
+};
