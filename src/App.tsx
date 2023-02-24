@@ -7,24 +7,27 @@ import { SettingPage } from "./pages/SettingPage";
 import ErrorPage from "./pages/ErrorPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
-import { useEffect, useState } from "react";
+import { useAppSelector, useAppDispatch } from './store/hooks';
+import { selectSessionInit, init as initSessionState } from "./store/slices/session";
+import { useEffect } from "react";
+
 function App() {
 
-  const [init, setInit] = useState(false);
+  // The `state` arg is correctly typed as `RootState` already
+  const init = useAppSelector(selectSessionInit);
+  const dispatch = useAppDispatch()
 
-  // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
+    // Update the document title using the browser API
     setTimeout(() => {
-      // Get data from preference
-      // Dispatch app state
-      setInit(true);
-    }, 5000)
-  }, [init]);
+      dispatch(initSessionState({ init: true }))
+    }, 2000)
 
-  if (init === false) {
+  }, [dispatch, init]);
+
+  if (!init) {
     return <h1>Loading</h1>;
   }
-
 
   return (
     <Routes>
