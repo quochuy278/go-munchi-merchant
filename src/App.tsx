@@ -10,17 +10,21 @@ import { LoginPage } from "./pages/LoginPage";
 import { useAppSelector, useAppDispatch } from './store/hooks';
 import { selectSessionInit, init as initSessionState } from "./store/slices/session";
 import { useEffect } from "react";
+import { getSessionState } from './utils/preference';
 
 function App() {
 
   // The `state` arg is correctly typed as `RootState` already
   const init = useAppSelector(selectSessionInit);
   const dispatch = useAppDispatch()
+  console.log('App render');
 
   useEffect(() => {
     // Update the document title using the browser API
-    setTimeout(() => {
-      dispatch(initSessionState({ init: true }))
+    setTimeout(async () => {
+      const sessionState = await getSessionState();
+      console.log('preference session state', sessionState);
+      dispatch(initSessionState({ ...sessionState, init: true }))
     }, 2000)
 
   }, [dispatch, init]);
@@ -31,13 +35,13 @@ function App() {
 
   return (
     <Routes>
-      <Route element={<Layout />}>
+      {/* <Route element={<Layout />}>
         <Route path="/setting" element={<SettingPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
-      </Route>
+      </Route> */}
       <Route path="/signin" element={<LoginPage />} />
-      <Route path="/*" element={<ErrorPage />} />
+      <Route path="*" element={<LoginPage />} />
     </Routes>
   );
 }

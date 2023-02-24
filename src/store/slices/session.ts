@@ -14,7 +14,7 @@ export const sessionSlice = createSlice({
   initialState: defaultState,
   reducers: {
     init: (state, action: PayloadAction<any>) => {
-      state.init = action.payload.init;
+      return action.payload;
     },
     clear: (state) => {
       state = defaultState;
