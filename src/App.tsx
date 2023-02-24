@@ -7,7 +7,25 @@ import { SettingPage } from "./pages/SettingPage";
 import ErrorPage from "./pages/ErrorPage";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
+import { useEffect, useState } from "react";
 function App() {
+
+  const [init, setInit] = useState(false);
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    setTimeout(() => {
+      // Get data from preference
+      // Dispatch app state
+      setInit(true);
+    }, 5000)
+  }, [init]);
+
+  if (init === false) {
+    return <h1>Loading</h1>;
+  }
+
+
   return (
     <Routes>
       <Route element={<Layout />}>
