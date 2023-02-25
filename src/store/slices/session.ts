@@ -4,15 +4,15 @@ import type { RootState } from "../index";
 interface SessionState {
   init: boolean;
   businessId: string | null;
-  userId: string | null;
-  token: string | null;
+  publicUserId: string | null;
+  verifyToken: string | null;
 }
 
 const defaultState: SessionState = {
   init: false,
   businessId: null,
-  userId: null,
-  token: null,
+  publicUserId: null,
+  verifyToken: null,
 };
 
 export const sessionSlice = createSlice({

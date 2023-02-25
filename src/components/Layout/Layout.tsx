@@ -23,9 +23,9 @@ const withChecking = (Component: React.FC) => () => {
 
 const Layout = ({ children }: any) => {
   return (
-    <div>
+    <div className={styles.app__container}>
       <Header />
-      <main className={styles.main__content}>
+      <main >
         <Outlet />
       </main>
       {/* <Footer /> */}

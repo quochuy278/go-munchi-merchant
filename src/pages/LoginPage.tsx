@@ -8,14 +8,14 @@ import { selectSession } from "../store/slices/session";
 export const LoginPage = () => {
 
   // The `state` arg is correctly typed as `RootState` already
-  const { userId } = useAppSelector(selectSession);
+  const { publicUserId } = useAppSelector(selectSession);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userId) {
+    if (publicUserId) {
       navigate('/business', { replace: true })
     }
-  }, [userId, navigate]);
+  }, [publicUserId, navigate]);
 
   return (
     <LoginForm />

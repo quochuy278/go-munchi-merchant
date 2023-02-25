@@ -11,7 +11,7 @@ export const HomePage = () => {
   console.log("This is home page");
   return (
     <CenterContainer>
-      <div>{businessId ?? 'No business yet'}</div>
+      <div>This home page</div>
     </CenterContainer>
   );
 };

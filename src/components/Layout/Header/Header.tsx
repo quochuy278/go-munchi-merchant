@@ -25,10 +25,9 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearSessionState } from "../../../utils/preference";
 import { clear as clearReduxSessionState } from "../../../store/slices/session";
-
+import { Link } from "react-router-dom";
 
 type Anchor = "top" | "left" | "bottom" | "right";
-
 
 export default function Header({ loginData }: any) {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,30 +37,60 @@ export default function Header({ loginData }: any) {
   });
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
-      (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (
-          event &&
-          event.type === "keydown" &&
-          ((event as React.KeyboardEvent).key === "Tab" ||
-            (event as React.KeyboardEvent).key === "Shift")
-        ) {
-          return;
-        }
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event &&
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
 
-        setState({ ...state, [anchor]: open });
-      };
+      setState({ ...state, [anchor]: open });
+    };
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleLogout = async () => {
-    const sessionState = {
-      userId: 'Huy Bui',
-      businessId: "Huy Dau Bui"
-    };
-    console.log('clear session state', sessionState);
+    // const sessionState = {
+    //   userId: "Huy Bui",
+    //   businessId: "Huy Dau Bui",
+    // };
+    // console.log("clear session state", sessionState);
     await clearSessionState();
     dispatch(clearReduxSessionState());
-  }
+  };
+  const navItems = [
+    {
+      id: 1,
+      primaryText: "Dashboard",
+      path: "/",
+      onClick: undefined,
+      icon: <DashboardIcon />,
+    },
+    {
+      id: 2,
+      primaryText: "Profile",
+      path: "/",
+      onClick: undefined,
+      icon: <AccountCircleIcon />,
+    },
+    {
+      id: 3,
+      primaryText: "Setting",
+      path: "/",
+      onClick: undefined,
+      icon: <SettingsIcon />,
+    },
+    {
+      id: 4,
+      primaryText: "Logout",
+      path: "/",
+      onClick: handleLogout,
+      icon: <LogoutIcon />,
+    },
+  ];
 
   const list = (anchor: Anchor) => (
     <Box
@@ -83,38 +112,16 @@ export default function Header({ loginData }: any) {
 
       <Divider />
       <List>
-        <ListItem key="Dashboard" disablePadding>
-          <ListItemButton href="/">
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem key="Profile" disablePadding>
-          <ListItemButton href="/profile">
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem key="Setting" disablePadding>
-          <ListItemButton href="/setting">
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Setting" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem key="Logout" disablePadding>
-          <ListItemButton onClick={handleLogout}>
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary="Logout" />
-          </ListItemButton>
-        </ListItem>
+        {navItems.map((item) => {
+          return (
+            <ListItem key={item.primaryText} disablePadding>
+              <ListItemButton onClick={item.onClick}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.primaryText} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
       </List>
     </Box>
   );
@@ -146,48 +153,22 @@ export default function Header({ loginData }: any) {
           </div>
 
           <Box sx={{ flex: 1 }} display="flex" justifyContent="space-between">
-            {/* <IconButton
-                            size="large"
-                            edge="start"
-                            aria-label="menu"
-                            sx={{
-                                mr: 2,
-                                backgroundColor: '#FFFFFF',
-                                width: '125px',
-                                height: '32px',
-                                borderRadius: 5,
-                                marginLeft: 2,
-                            }}
-                            component={Link}
-                            to={'/'}
-                        > */}
             <Box
               display="flex"
               alignItems="center"
               justifyContent="center"
               width="150px"
             >
-              {/* <FactCheckIcon
-                                    color="primary"
-                                    sx={{ height: '15px', width: '15px', marginRight: '5px' }}
-                                /> */}
               <Typography color={"black"} variant="h4">
                 Munchi
               </Typography>
             </Box>
-            {/* svg */}
             <Box
               display="flex"
               alignItems="center"
               justifyContent="flex-start"
               width="150px"
-            >
-              {/* <FactCheckIcon
-                                    color="primary"
-                                    sx={{ height: '15px', width: '15px', marginRight: '5px' }}
-                                /> */}
-              {/* <img src={MunchiLogo} width={100} height={50} /> */}
-            </Box>
+            ></Box>
             {/* </IconButton> */}
             <Box display={"flex"} alignItems="center">
               <Typography color={"black"} fontSize="16px" lineHeight="13px">
@@ -198,7 +179,7 @@ export default function Header({ loginData }: any) {
                 checked={isOpen}
                 onChange={() => setIsOpen(!isOpen)}
                 sx={{ color: "black" }}
-              // onClick
+                // onClick
               />
               <CircleIcon
                 sx={{
@@ -208,17 +189,7 @@ export default function Header({ loginData }: any) {
                 }}
                 {...(isOpen ? { color: "success" } : { color: "warning" })}
               />
-              {/* <Typography color={'#000000'} fontSize="12px" lineHeight="16px">
-                                {isOpen ? t('restaurantStatus.open') : t('restaurantStatus.close')}
-                            </Typography> */}
             </Box>
-
-            {/* <Box display={"flex"} alignItems="center">
-              <ButtonGroup variant="text" aria-label="text button group">
-                <Button onClick={() => i18n.changeLanguage("en")}>en</Button>
-                <Button onClick={() => i18n.changeLanguage("fi")}>fi</Button>
-              </ButtonGroup>
-            </Box> */}
           </Box>
         </Toolbar>
       </AppBar>
