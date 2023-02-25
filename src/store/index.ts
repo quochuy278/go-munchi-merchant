@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { munchiApi } from "./slices/api";
 import sessionReducer from "./slices/session";
 
 const store = configureStore({
   reducer: {
     session: sessionReducer,
+    [munchiApi.reducerPath]: munchiApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: true }).concat(
+      munchiApi.middleware
+    ),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
