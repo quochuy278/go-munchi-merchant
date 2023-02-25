@@ -15,8 +15,26 @@ import React, { useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { setSessionState } from '../utils/preference';
+import { useAppDispatch } from "../store/hooks";
+import { set as setReduxSessionState } from "../store/slices/session";
+import { useNavigate } from "react-router-dom";
+
+
 const LoginForm = () => {
   const [show, setShow] = useState(false);
+
+  const dispatch = useAppDispatch()
+
+  const handleLogin = async () => {
+    const sessionState = {
+      userId: 'Huy Bui',
+    };
+    console.log('set session state', sessionState);
+    await setSessionState(sessionState);
+    dispatch(setReduxSessionState(sessionState));
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -65,7 +83,7 @@ const LoginForm = () => {
             label="Remember me"
           />
           <Button
-            type="submit"
+            onClick={handleLogin}
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}

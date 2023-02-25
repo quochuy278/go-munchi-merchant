@@ -22,7 +22,13 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import { useAppDispatch } from "../../../store/hooks";
+import { clearSessionState } from "../../../utils/preference";
+import { clear as clearReduxSessionState } from "../../../store/slices/session";
+
+
 type Anchor = "top" | "left" | "bottom" | "right";
+
 
 export default function Header({ loginData }: any) {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,19 +38,31 @@ export default function Header({ loginData }: any) {
   });
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event &&
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return;
-      }
+      (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+          event &&
+          event.type === "keydown" &&
+          ((event as React.KeyboardEvent).key === "Tab" ||
+            (event as React.KeyboardEvent).key === "Shift")
+        ) {
+          return;
+        }
 
-      setState({ ...state, [anchor]: open });
+        setState({ ...state, [anchor]: open });
+      };
+
+  const dispatch = useAppDispatch()
+
+  const handleLogout = async () => {
+    const sessionState = {
+      userId: 'Huy Bui',
+      businessId: "Huy Dau Bui"
     };
-  const onLogoutHandler = async () => {};
+    console.log('clear session state', sessionState);
+    await clearSessionState();
+    dispatch(clearReduxSessionState());
+  }
+
   const list = (anchor: Anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
@@ -90,7 +108,7 @@ export default function Header({ loginData }: any) {
           </ListItemButton>
         </ListItem>
         <ListItem key="Logout" disablePadding>
-          <ListItemButton onClick={onLogoutHandler}>
+          <ListItemButton onClick={handleLogout}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
@@ -180,7 +198,7 @@ export default function Header({ loginData }: any) {
                 checked={isOpen}
                 onChange={() => setIsOpen(!isOpen)}
                 sx={{ color: "black" }}
-                // onClick
+              // onClick
               />
               <CircleIcon
                 sx={{
