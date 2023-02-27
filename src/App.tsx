@@ -19,13 +19,31 @@ import ProtectedRoute from "./components/Router/ProtectedRoute";
 import { Button } from "@mui/material";
 import BusinessPage from "./pages/BusinessPage";
 import FullscreenLoading from "./components/Loading/FullscreenLoading";
-
+import { Capacitor } from "@capacitor/core";
+import { LocalNotifications } from "@capacitor/local-notifications";
+import { title } from "process";
 function App() {
   // The `state` arg is correctly typed as `RootState` already
   const { init, publicUserId } = useAppSelector(selectSession);
   const dispatch = useAppDispatch();
   console.log("App render");
+  console.log(Capacitor.getPlatform());
+  const checkPermission = async () => {
+    let permission = await LocalNotifications.checkPermissions();
+    if (permission.display === "prompt") {
+      permission = await LocalNotifications.requestPermissions();
+    }
+    if (permission.display !== "granted") {
+      throw new Error("User denied permissions!");
+    }
 
+   console.log(process.env.NODE_ENV)
+    console.log(permission);
+  };
+  if (Capacitor.getPlatform() === "android") {
+    // do something
+    checkPermission();
+  }
   useEffect(() => {
     // Update the document title using the browser API
     setTimeout(async () => {
