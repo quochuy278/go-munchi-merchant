@@ -18,6 +18,7 @@ import { addSessionState, getSessionState } from "./utils/preference";
 import ProtectedRoute from "./components/Router/ProtectedRoute";
 import { Button } from "@mui/material";
 import BusinessPage from "./pages/BusinessPage";
+import FullscreenLoading from "./components/Loading/FullscreenLoading";
 
 function App() {
   // The `state` arg is correctly typed as `RootState` already
@@ -35,7 +36,7 @@ function App() {
   }, [dispatch, init]);
 
   if (!init) {
-    return <h1>Loading</h1>;
+    return <FullscreenLoading />;
   }
 
   return (
