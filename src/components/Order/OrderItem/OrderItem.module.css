@@ -1,0 +1,23 @@
+.main__card__container {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 1px #00000012;
+  opacity: 1;
+}
+
+.divider {
+  border-left: 1px solid #e8eaee;
+  height: 20px;
+  padding: 0;
+}
+
+.card__item__container {
+  padding-top: 10px;
+}
+
+.product_item_container {
+  padding: 3px;
+  display: "flex";
+  width: 100%;
+}
