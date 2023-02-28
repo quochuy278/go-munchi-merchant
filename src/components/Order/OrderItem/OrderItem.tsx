@@ -5,7 +5,7 @@ import { Order } from "../../../types";
 import { IconFactory } from "../../Factory/icons/IconFactory";
 import OrderFactory from "../../Factory/order/OrderFactory";
 import ProductFactory from "../../Factory/product/ProductFactory";
-import OrderFooter from "../OrderFooter/OrderFooter";
+
 import styles from "./OrderItem.module.css";
 interface OrderProps {
   order: Order;
