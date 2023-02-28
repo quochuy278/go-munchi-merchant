@@ -1,8 +1,9 @@
 import React from "react";
 import { OrderEnum } from "../../../types/enum/enum";
-import OrderAcceptedFooter from "../../OrderFooter/OrderAcceptedFooter";
-import OrderCompletedFooter from "../../OrderFooter/OrderCompletedFooter";
-import OrderPendingFooter from "../../OrderFooter/OrderPendingFooter";
+import OrderAcceptedFooter from "../../Order/OrderFooter/OrderAcceptedFooter";
+import OrderCompletedFooter from "../../Order/OrderFooter/OrderCompletedFooter";
+import OrderPendingFooter from "../../Order/OrderFooter/OrderPendingFooter";
+
 
 interface FooterProps {
   prepTime: number;
