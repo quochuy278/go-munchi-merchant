@@ -2,11 +2,11 @@ import logo from "./logo.svg";
 import "./App.css";
 import { LayoutWithChecking } from "./components/Layout/Layout";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import { ProfilePage } from "./pages/ProfilePage";
-import { SettingPage } from "./pages/SettingPage";
-import ErrorPage from "./pages/ErrorPage";
-import { HomePage } from "./pages/HomePage";
-import { LoginPage } from "./pages/LoginPage";
+import { ProfilePage } from "./pages/Profile/ProfilePage";
+import { SettingPage } from "./pages/Setting/SettingPage";
+import ErrorPage from "./pages/Error/ErrorPage";
+import { HomePage } from "./pages/Home/HomePage";
+import { LoginPage } from "./pages/Login/LoginPage";
 import { useAppSelector, useAppDispatch } from "./store/hooks";
 import {
   selectSession,
@@ -17,11 +17,12 @@ import { useEffect } from "react";
 import { addSessionState, getSessionState } from "./utils/preference";
 import ProtectedRoute from "./components/Router/ProtectedRoute";
 import { Button } from "@mui/material";
-import BusinessPage from "./pages/BusinessPage";
+import BusinessPage from "./pages/Business/BusinessPage";
 import FullscreenLoading from "./components/Loading/FullscreenLoading";
 import { Capacitor } from "@capacitor/core";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import { title } from "process";
+import { DetailPage } from "./pages/Detail/DetailPage";
 function App() {
   // The `state` arg is correctly typed as `RootState` already
   const { init, publicUserId } = useAppSelector(selectSession);
@@ -62,6 +63,7 @@ function App() {
       <Route element={<ProtectedRoute canAccess={publicUserId != null} />}>
         <Route element={<LayoutWithChecking />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/:orderId" element={<DetailPage />} />
           <Route path="/setting" element={<SettingPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
