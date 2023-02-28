@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import LoginForm from '../components/LoginForm'
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { selectSession } from "../store/slices/session";
+import LoginForm from '../../components/LoginForm/LoginForm'
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { selectSession } from "../../store/slices/session";
 
 
 export const LoginPage = () => {

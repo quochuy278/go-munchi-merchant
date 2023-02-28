@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from './error.module.css'
+import React from "react";
+import styles from "./ErrorPage.module.css";
 const ErrorPage = () => {
   return (
     <div className="main">
@@ -23,9 +23,9 @@ const ErrorPage = () => {
           />
           <g transform="translate(-448 -157) translate(448 157)">
             <mask id="prefix__b" fill="#fff">
-              <use  />
+              <use />
             </mask>
-            <use fill="#F6F6F7"  />
+            <use fill="#F6F6F7" />
             <path
               fill="#EDEDF0"
               fillRule="nonzero"
@@ -121,7 +121,7 @@ const ErrorPage = () => {
         </g>
       </svg>
     </div>
-  )
-}
+  );
+};
 
-export default ErrorPage
+export default ErrorPage;

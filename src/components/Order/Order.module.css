@@ -1,0 +1,11 @@
+.section__container {
+  height:100% !important;
+  background-color: #E8EAEE;
+  border-radius: 10px;
+  overflow: scroll;
+  padding: 5px;
+}
+.section__container::-webkit-scrollbar {
+  display: none;
+}
+/* #E8EAEE; */

@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "..";
+import { FilterQuery } from "../../components/Order/OrderList/OrderList";
 
 export interface SignInData {
   email: string;
@@ -49,7 +50,24 @@ export const munchiApi = createApi({
         },
       }),
     }),
+    getFilteredOrder: builder.query({
+      query: (filterQuery: FilterQuery) => ({
+        url: `orders/filteredOrders?query=${filterQuery.query}&paramsQuery=${filterQuery.paramsQuery}&publicBusinessId=${filterQuery.publicBusinessId}`,
+        method: "GET",
+      }),
+    }),
+    getOrderByPublicId: builder.query({
+      query: (id) => ({
+        url: `orders/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useSignInMutation, useGetBusinessQuery } = munchiApi;
+export const {
+  useSignInMutation,
+  useGetBusinessQuery,
+  useGetFilteredOrderQuery,
+  useGetOrderByPublicIdQuery
+} = munchiApi;

@@ -2,11 +2,11 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import BusinessList from "../components/Business/BusinessList";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { useGetBusinessQuery } from "../store/slices/api";
-import { selectSession } from "../store/slices/session";
-import styles from "./businesspage.module.css";
+import BusinessList from "../../components/Business/BusinessList";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useGetBusinessQuery } from "../../store/slices/api";
+import { selectSession } from "../../store/slices/session";
+import styles from "./BusinessPage.module.css";
 
 const BusinessPage = () => {
   const { businessId, publicUserId } = useAppSelector(selectSession);
