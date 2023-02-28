@@ -1,5 +1,5 @@
 import React from "react";
-import CenterContainer from "../components/Container/CenterContainer";
+import CenterContainer from "../../components/Container/CenterContainer";
 
 export const SettingPage = () => {
   console.log("🚀 ~ file: SettingPage.tsx:4 ~ SettingPage ~ SettingPage:");

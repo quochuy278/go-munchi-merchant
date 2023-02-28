@@ -1,5 +1,5 @@
 import React from "react";
-import CenterContainer from "../components/Container/CenterContainer";
+import CenterContainer from "../../components/Container/CenterContainer";
 
 export const ProfilePage = () => {
   console.log('This is ProfilePage page')
