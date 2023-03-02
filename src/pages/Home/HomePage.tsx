@@ -25,35 +25,10 @@ export const HomePage = () => {
 
     playBoop();
   };
-  // const onHandleClick = async (event: any) => {
-  //   await LocalNotifications.schedule({
-  //     notifications: [
-  //       {
-  //         id: 1,
-  //         title: "Tesing from Huy",
-  //         body: "tesing this shitty functionality",
-  //         sound: "beep.wav",
-  //         autoCancel: true,
-  //       },
-  //     ],
-  //   });
-  // };
 
   return (
     <CenterContainer>
-      {/* <Button variant="contained" onClick={onHandleModal}>
-        Ringing button
-      </Button>
-      <Button variant="contained" onClick={onStop}>
-        Stop button
-      </Button>
-      {modal && (
-        <FactoryDialog
-          open={modal}
-          onClose={onCloseDialog}
-          modalData={{ data: "Hello World" }}
-        />
-      )} */}<Order/>
+     <Order/>
     </CenterContainer>
   );
 };
