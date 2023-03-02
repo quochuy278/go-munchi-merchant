@@ -28,7 +28,6 @@ function App() {
   const { init, publicUserId } = useAppSelector(selectSession);
   const dispatch = useAppDispatch();
   console.log("App render");
-  console.log(Capacitor.getPlatform());
   const checkPermission = async () => {
     let permission = await LocalNotifications.checkPermissions();
     if (permission.display === "prompt") {
@@ -37,9 +36,6 @@ function App() {
     if (permission.display !== "granted") {
       throw new Error("User denied permissions!");
     }
-
-   console.log(process.env.NODE_ENV)
-    console.log(permission);
   };
   if (Capacitor.getPlatform() === "android") {
     // do something
@@ -49,7 +45,6 @@ function App() {
     // Update the document title using the browser API
     setTimeout(async () => {
       const sessionState = await getSessionState();
-      console.log("preference session state", sessionState);
       dispatch(setSessionState({ ...sessionState, init: true }));
     }, 2000);
   }, [dispatch, init]);

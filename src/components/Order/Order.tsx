@@ -1,10 +1,26 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { Box, Button } from "@mui/material";
+import React, { useEffect } from "react";
+import { useAppSelector } from "../../store/hooks";
+import { selectSession } from "../../store/slices/session";
 import OrderContainer from "../Container/OrderContainer";
 import styles from "./Order.module.css";
+import OrderCompleteList from "./OrderCompleteList/OrderCompleteList";
 import OrderList from "./OrderList/OrderList";
 import OrderTitle from "./OrderTitle/OrderTitle";
+import { io } from "socket.io-client";
+import { useSocket, useSocketEvent } from "socket.io-react-hook";
+
 const Order = () => {
+  const { businessId } = useAppSelector(selectSession);
+  const { socket, error, connected } = useSocket("http://localhost:5000/");
+  useEffect(() => {
+    console.log(socket)
+    socket.emit("join", businessId);
+    socket.on("receive-order", (socket) => {
+      console.log(socket, "data from room");
+    });
+  }, [socket]);
+
   return (
     <OrderContainer>
       <Box
@@ -16,28 +32,24 @@ const Order = () => {
         <Box gridColumn="span 6" className={styles.section__container}>
           <OrderTitle title={"Pending"} quantity={8} />
           <OrderList />
-          {/* <OrderTitle
-            orderTitle={t("section.sectiontitle.0")}
-            orderQuantity={pendingOrders.length}
-          />
-          <OrderCardList ordersData={pendingOrders} /> */}
         </Box>
 
         {/* Accepted */}
-        {/* 
-        <Box gridColumn="span 6" className={styles.section__container}>
+
+        {/* <Box gridColumn="span 6" className={styles.section__container}>
           <OrderTitle
-            orderTitle={t("section.sectiontitle.1")}
-            orderQuantity={acceptedOrders.length}
+            title={"In Progress"}
+            quantity={0}
           />
-          <OrderCardList ordersData={acceptedOrders} />
+          <OrderList />
         </Box> */}
+
         {/* Ready */}
 
         {/* <Box gridColumn="span 2" className={styles.section__container}>
           <OrderTitle
-            orderTitle={t("section.sectiontitle.2")}
-            orderQuantity={readyOrders.length}
+            title={'Completed'}
+            quantity={0}
           />
           <OrderCompleteList ordersData={readyOrders} />
         </Box> */}

@@ -7,10 +7,9 @@ import { addSessionState } from "../../utils/preference";
 const BusinessItem = ({ data }: any) => {
   const dispatch = useAppDispatch();
   const handleSetBusiness = async () => {
-    const businessName = "Huy Dau Bui Business";
     const businessState = { businessId: data.publicId };
     await addSessionState(businessState);
-    dispatch(setBussinessId(businessName));
+    dispatch(setBussinessId(businessState.businessId));
   };
   return (
     <Card

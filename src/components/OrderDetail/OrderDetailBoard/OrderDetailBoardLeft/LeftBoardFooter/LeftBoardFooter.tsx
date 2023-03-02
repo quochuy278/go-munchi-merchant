@@ -1,8 +1,15 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { Summary } from "../../../../../types";
 import styles from "./LeftBoardFooter.module.css";
-export const LeftBoardFooter = () => {
+
+interface FooterProps {
+  summary: Summary;
+}
+
+export const LeftBoardFooter = ({ summary }: FooterProps) => {
+  console.log(summary);
   return (
     <Box className={styles.payment_content}>
       <Box sx={{ width: "100%" }}>
@@ -22,7 +29,7 @@ export const LeftBoardFooter = () => {
               lineHeight="16px"
               sx={{ color: "#51545E" }}
             >
-              3.8 €
+              {summary.tax} €
             </Typography>
           </Box>
         </Box>
@@ -42,7 +49,7 @@ export const LeftBoardFooter = () => {
               lineHeight="39px"
               sx={{ color: "#000000" }}
             >
-              25.90 €
+             {summary.total} €
             </Typography>
           </Box>
         </Box>

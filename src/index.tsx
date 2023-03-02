@@ -6,15 +6,18 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import store from './store'
 import { Provider } from 'react-redux'
+import { IoProvider } from 'socket.io-react-hook';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <Provider store={store}>
+    <IoProvider>
     <BrowserRouter>
       <App />
     </BrowserRouter>
+    </IoProvider>
   </Provider>
 );
 

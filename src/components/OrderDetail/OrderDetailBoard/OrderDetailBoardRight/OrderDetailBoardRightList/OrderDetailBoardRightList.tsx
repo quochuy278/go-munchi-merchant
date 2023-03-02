@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
+import { Summary } from "../../../../../types";
 import { IconFactory } from "../../../../Factory/icons/IconFactory";
-import styles from './OrderDetailBoardRightList.module.css'
+import styles from "./OrderDetailBoardRightList.module.css";
 
-
-export interface OrderDetailRightListProps {
+interface OrderDetailRightListProps {
   name: string;
   deliveryType: number;
 }

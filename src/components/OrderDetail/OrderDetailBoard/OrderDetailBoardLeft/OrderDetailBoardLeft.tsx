@@ -35,30 +35,11 @@ const OrderDetailBoardLeft = ({ data }: any) => {
         </Box>
         <Divider sx={{ width: "100%", marginTop: "10px" }} />
         <LeftBoardList products={data.products} />
-        <Box sx={{ width: "90%" }}>
-          <Box
-            sx={{
-              backgroundColor: "#F3F5F7",
-              width: "fit-content",
-              height: "fit-content",
-              padding: "8px",
-              borderRadius: "8px",
-            }}
-          >
-            <Typography
-              fontSize="12px"
-              lineHeight="16px"
-              fontFamily="DM-sans"
-              fontWeight={600}
-            >
-              {data?.products.comments}
-            </Typography>
-          </Box>
-        </Box>
+      
       </Box>
       <Box className={styles.payment_container}>
         <Divider sx={{ width: "100%", marginBottom: "20px" }} />
-        <LeftBoardFooter />
+        <LeftBoardFooter summary={data.summary}/>
       </Box>
     </Box>
   );
