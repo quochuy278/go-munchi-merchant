@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { OrderEnum } from "../../../types/enum/enum";
-import DetailCompletedFooter from "../../OrderDetail/OrderDetailBoard/OrderDetailBoardRight/OrderDetailBoardRightFooter/OrderDetailFooter/DetailCompletedFooter";
-import DetailPendingFooter from "../../OrderDetail/OrderDetailBoard/OrderDetailBoardRight/OrderDetailBoardRightFooter/OrderDetailFooter/DetailPendingFooter";
+import DetailCompletedFooter from "../../OrderDetail/OrderDetailBoard/OrderDetailBoardRight/OrderDetailFooter/DetailCompletedFooter";
+import DetailPendingFooter from "../../OrderDetail/OrderDetailBoard/OrderDetailBoardRight/OrderDetailFooter/DetailPendingFooter";
 import styles from "./DetailOrderFactory.module.css";
 
 interface OrderDetailBoardRightFooterProps {
