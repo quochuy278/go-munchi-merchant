@@ -30,30 +30,52 @@ export const LeftBoardList = ({ products }: any) => {
                   <Typography fontSize="12px" lineHeight="16px">
                     {product.name}
                   </Typography>
-                  <Typography
+                  {/* <Typography
                     fontSize="12px"
                     lineHeight="16px"
                     sx={{ color: "#51545E" }}
                   >
                     Add ons: 1x chipotle sauce
-                  </Typography>
+                  </Typography> */}
                 </Box>
               </Box>
               <Box textAlign="right">
                 <Typography fontSize="12px" lineHeight="16px">
-                  12.10 €
+                  {product.price} €
                 </Typography>
-                <Typography
+                {/* <Typography
                   fontSize="12px"
                   lineHeight="16px"
                   sx={{ color: "#51545E" }}
                 >
                   + 2.20 €
-                </Typography>
+                </Typography> */}
               </Box>
             </Box>
             <Box width="120%">
               <Divider sx={{ width: "100%", marginTop: "10px" }} />
+            </Box>
+            <Box sx={{ width: "90%" }}>
+              {product.comment ? (
+                <Box
+                  sx={{
+                    backgroundColor: "#F3F5F7",
+                    width: "fit-content",
+                    height: "fit-content",
+                    padding: "8px",
+                    borderRadius: "8px",
+                  }}
+                >
+                  <Typography
+                    fontSize="12px"
+                    lineHeight="16px"
+                    fontFamily="DM-sans"
+                    fontWeight={600}
+                  >
+                    {product.comment}
+                  </Typography>
+                </Box>
+              ) : null}
             </Box>
           </Box>
         );
