@@ -1,16 +1,7 @@
-import CenterContainer from "../../components/Container/CenterContainer";
-import { useAppSelector } from "../../store/hooks";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import { selectSession, set as setSessionState } from "../../store/slices/session";
-import { Button } from "@mui/material";
-import { LocalNotifications } from "@capacitor/local-notifications";
 import { useState } from "react";
-import Modal from "../../components/Dialog/Dialog";
-import FactoryDialog from "../../components/Dialog/Dialog";
 import useSound from "use-sound";
 import music from "../../assets/sounds/song.mp3";
-import { io } from "socket.io-client";
-import useWebSocket, { ReadyState, useSocketIO } from "react-use-websocket";
+import CenterContainer from "../../components/Container/CenterContainer";
 import Order from "../../components/Order/Order";
 
 export const HomePage = () => {
