@@ -14,19 +14,20 @@ const CustomeTypography = styled(Typography)(({ theme }) => ({
 }));
 
 const CustomeBox = styled(Box)(({ theme }) => ({
-  height: "26px",
-  width: "26px",
+  height: "20px",
+  width: "15px",
   backgroundColor: "white",
   textAlign: "center",
-  marginLeft: "10px",
-  borderRadius: "8px",
+  marginLeft: "5px",
+  padding: '2px',
+  borderRadius: "5px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
 }));
 const OrderTitle = ({ title, quantity }: OrderTitleProps) => {
   return (
-    <Box gridColumn="span 2" sx={{ padding: "20px" }} display="flex">
+    <Box gridColumn="span 2" sx={{ padding: "10px" }} display="flex">
       <CustomeTypography variant="h5">{title}</CustomeTypography>
       <CustomeBox>
         <Typography fontSize="12px">{quantity}</Typography>
