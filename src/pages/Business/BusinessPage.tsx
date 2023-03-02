@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BusinessList from "../../components/Business/BusinessList";
+import FullscreenLoading from "../../components/Loading/FullscreenLoading";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useGetBusinessQuery } from "../../store/slices/api";
 import { selectSession } from "../../store/slices/session";
@@ -21,7 +22,7 @@ const BusinessPage = () => {
     }
   }, [businessId, navigate]);
   if (isLoading || isFetching) {
-    return <h1>Loading in Business...</h1>;
+    return <FullscreenLoading />;
   }
   console.log(data);
 
