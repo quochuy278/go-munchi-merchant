@@ -67,13 +67,13 @@ const OrderItem = ({ order }: OrderProps) => {
             <ProductFactory product={order.products} orderId={order.id} />
           </Box>
         </Box>
-        <OrderFactory
-          orderStatus={order.status}
-          orderId={order.id}
-          deliveryType={order.deliveryType}
-          prepTime={order.preparedIn}
-        />
       </Link>
+      <OrderFactory
+        orderStatus={order.status}
+        orderId={order.id}
+        deliveryType={order.deliveryType}
+        prepTime={order.preparedIn}
+      />
     </Box>
   );
 };
