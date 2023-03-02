@@ -35,7 +35,6 @@ const OrderList = () => {
   };
   const { data, isFetching, isLoading, isError, error } =
     useGetFilteredOrderQuery(filterData);
-  console.log(data);
   if (isFetching || isLoading) {
     return <FullscreenLoading />;
   }
