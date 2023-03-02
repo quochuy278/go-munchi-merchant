@@ -24,9 +24,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { signInSchema } from "../../utils/validateSchema";
 import { TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Notification from "../Notification/Notification";
 type SignInInput = TypeOf<typeof signInSchema>;
 const LoginForm = () => {
   const [show, setShow] = useState(false);
+  const [error, setError] = useState<string>("");
   const dispatch = useAppDispatch();
   const [signinUser, { isLoading: loading }] = useSignInMutation();
   const {
@@ -44,7 +46,9 @@ const LoginForm = () => {
       email: values.email,
       password: values.password,
     });
-    console.log(response);
+    if (response.error) {
+      setError(response.error.data.result);
+    }
     const sessionState = {
       publicUserId: response.data.publicId,
       verifyToken: response.data.verifyToken,
@@ -89,8 +93,8 @@ const LoginForm = () => {
             autoComplete="email"
             autoFocus
             type="email"
-            error={!!errors['email']}
-            helperText={errors['email'] ? errors['email'].message : ''}
+            error={!!errors["email"]}
+            helperText={errors["email"] ? errors["email"].message : ""}
           />
           <TextField
             margin="normal"
@@ -102,8 +106,8 @@ const LoginForm = () => {
             id="password"
             name="password"
             autoComplete="password"
-            error={!!errors['password']}
-            helperText={errors['password'] ? errors['password'].message : ''}
+            error={!!errors["password"]}
+            helperText={errors["password"] ? errors["password"].message : ""}
             InputProps={{
               endAdornment: (
                 <IconButton onClick={() => setShow(!show)}>
@@ -139,6 +143,11 @@ const LoginForm = () => {
           </Grid>
         </Box>
       </Box>
+      {error && (
+        <Box sx={{ marginTop: "20px" }}>
+          <Notification message={error} />
+        </Box>
+      )}
     </Container>
   );
 };
