@@ -5,7 +5,6 @@ const ProtectedRoute = ({
   children,
   redirectTo = "/signin",
 }: any) => {
-  console.log(canAccess);
   if (!canAccess) {
     return <Navigate to={redirectTo} replace />;
   }
