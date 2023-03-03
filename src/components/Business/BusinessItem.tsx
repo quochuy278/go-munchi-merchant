@@ -1,16 +1,17 @@
 import { Card, CardActionArea, CardHeader } from "@mui/material";
-import React from "react";
+import { useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
-import { setBussinessId } from "../../store/slices/session";
-import { addSessionState } from "../../utils/preference";
-
+import FactoryDialog from "../Dialog/Dialog";
 const BusinessItem = ({ data }: any) => {
-  const dispatch = useAppDispatch();
-  const handleSetBusiness = async () => {
-    const businessState = { businessId: data.publicId };
-    await addSessionState(businessState);
-    dispatch(setBussinessId(businessState.businessId));
+  const [open, setOpen] = useState(false);
+  const onOpen = async () => {
+    setOpen(true);
   };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+  // console.log(open)
   return (
     <Card
       sx={{
@@ -21,7 +22,6 @@ const BusinessItem = ({ data }: any) => {
         },
         color: "white",
       }}
-      onClick={handleSetBusiness}
     >
       <CardActionArea
         sx={{
@@ -29,9 +29,19 @@ const BusinessItem = ({ data }: any) => {
             backgroundColor: "red",
           },
         }}
+        onClick={onOpen}
       >
         <CardHeader title={data.name} />
       </CardActionArea>
+      <FactoryDialog
+        onClose={onClose}
+        open={open}
+        isBusiness={true}
+        modalData={{
+          name: data.name,
+          publicId: data.publicId,
+        }}
+      />
     </Card>
   );
 };

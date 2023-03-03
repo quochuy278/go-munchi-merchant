@@ -1,6 +1,7 @@
 import { Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useState } from "react";
+import FactoryDialog from "../../Dialog/Dialog";
 const CustomReadyButton = styled(Button)(({ theme }) => ({
   textAlign: "center",
   marginTop: "15px",
@@ -33,12 +34,33 @@ const OrderCompletedFooter = ({
   prepTime,
   deliveryType,
 }: FooterProps) => {
+  const [open, setOpen] = useState(false);
+  const acceptHandler = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
-    <CustomReadyButton variant="contained">
-      <Typography sx={{ color: "white", opacity: 0.98 }} fontSize="13px">
-        Completed
-      </Typography>
-    </CustomReadyButton>
+    <>
+      {" "}
+      <CustomReadyButton variant="contained" onClick={acceptHandler}>
+        <Typography sx={{ color: "white", opacity: 0.98 }} fontSize="13px">
+          Completed
+        </Typography>
+      </CustomReadyButton>
+      <FactoryDialog
+        isOrder={true}
+        open={open}
+        onClose={onClose}
+        modalData={{
+          deliveryType: deliveryType,
+          orderId: orderId,
+          status: orderStatus,
+          newPrepTime: 25 as number
+        }}
+      />
+    </>
   );
 };
 
