@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, Button, styled } from "@mui/material";
 import CountDownClock from "../../CountDownClock/CountDownClock";
+import FactoryDialog from "../../Dialog/Dialog";
 
 const CustomAcceptedButton = styled(Button)(({ theme }) => ({
   textAlign: "center",
@@ -59,7 +60,7 @@ const OrderAcceptedFooter = ({
       <CountDownClock targetDate={dateTimeAfterPrepTime} />
       <CustomAcceptedButton variant="contained" onClick={acceptHandler}>
         <Typography sx={{ color: "white", opacity: 0.98 }} fontSize="13px">
-       Accepted
+          Accepted
         </Typography>
       </CustomAcceptedButton>
       {/* <DialogAlert
@@ -71,6 +72,17 @@ const OrderAcceptedFooter = ({
         orderStatus={orderStatus}
         prepTime={prepTime}
       /> */}
+
+      <FactoryDialog
+        isOrder={true}
+        open={true}
+        onClose={acceptDialogCloseHandler}
+        modalData={{
+          deliveryType: deliveryType,
+          orderId: orderId,
+          status: orderStatus,
+        }}
+      />
     </Box>
   );
 };

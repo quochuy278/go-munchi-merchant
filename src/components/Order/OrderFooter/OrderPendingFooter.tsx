@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Button, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import FactoryDialog from "../../Dialog/Dialog";
 
 interface FooterProps {
   prepTime: number;
@@ -23,11 +24,11 @@ const OrderPendingFooter = ({
     setNewPrepTime(time);
   };
   const [open, setOpen] = useState(false);
-  const acceptHandler = () => {
+  const onOpen = () => {
     setOpen(true);
   };
 
-  const acceptDialogCloseHandler = () => {
+  const onClose = () => {
     setOpen(false);
   };
   return (
@@ -153,20 +154,22 @@ const OrderPendingFooter = ({
             borderRadius: "8px",
             border: "none",
           }}
-          onClick={acceptHandler}
+          onClick={onOpen}
         >
           Accept
         </Button>
       </Box>
-      {/* <DialogAlert
-          open={open}
-          newPrepTime={newPrepTime}
-          onClose={acceptDialogCloseHandler}
-          orderId={orderId}
-          deliveryType={deliveryType}
-          orderStatus={orderStatus}
-          prepTime={prepTime}
-        /> */}
+      <FactoryDialog
+        isOrder={true}
+        open={open}
+        onClose={onClose}
+        modalData={{
+          deliveryType: deliveryType,
+          orderId: orderId,
+          status: orderStatus,
+          newPrepTime: newPrepTime,
+        }}
+      />
     </Box>
   );
 };
