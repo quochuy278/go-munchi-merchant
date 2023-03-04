@@ -1,14 +1,13 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
-import styles from "/OrderCompleteList.module.css";
-import { Order } from "../../../types";
+import { OrderModel } from "../../../types";
 import OrderCompleteItem from "../OrderCompleteItem/OrderCompleteItem";
+import styles from "./OrderCompleteList.module.css";
 
 interface OrderCompleteListProp {
-  order: Order[];
+  orders: OrderModel[];
 }
 
-const OrderCompleteList = ({ order }: OrderCompleteListProp) => {
+const OrderCompleteList = ({ orders }: OrderCompleteListProp) => {
   return (
     <Box
       display="grid"
@@ -17,7 +16,7 @@ const OrderCompleteList = ({ order }: OrderCompleteListProp) => {
       gap={2}
       paddingX={2}
     >
-      {order.length === 0 ? (
+      {orders?.length === 0 ? (
         <Box
           width="100%"
           height="50vh"
@@ -29,7 +28,7 @@ const OrderCompleteList = ({ order }: OrderCompleteListProp) => {
         </Box>
       ) : (
         <>
-          {order.map((order: Order) => {
+          {orders.map((order: OrderModel) => {
             return <OrderCompleteItem order={order} key={order.id} />;
           })}
         </>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography, Button, styled } from "@mui/material";
 import CountDownClock from "../../CountDownClock/CountDownClock";
 import FactoryDialog from "../../Dialog/Dialog";
+import { OrderFooterProps } from "../../../types";
 
 const CustomAcceptedButton = styled(Button)(({ theme }) => ({
   textAlign: "center",
@@ -34,7 +35,8 @@ const OrderAcceptedFooter = ({
   orderId,
   prepTime,
   deliveryType,
-}: FooterProps) => {
+  status
+}: OrderFooterProps) => {
   const [newPrepTime, setNewPrepTime] = useState(10);
   const [open, setOpen] = useState(false);
   const acceptHandler = () => {

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { FactoryButtonContent } from "../../../../Factory/buttonContent/FactoryButtonContent";
+import CountDownClock from "../../../../CountDownClock/CountDownClock";
 export interface DetailFooterProps {
   timeStamp: string;
   orderStatus: number;
   deliveryType: number;
   orderId: number;
+  preparedIn:number
 }
 
 const DetailCompletedFooter = ({
@@ -13,20 +15,19 @@ const DetailCompletedFooter = ({
   timeStamp,
   orderId,
   deliveryType,
+  preparedIn,
 }: DetailFooterProps) => {
   const [open, setOpen] = useState(false);
-  const [newPrepTime, setNewPrepTime] = useState(10);
 
-  const acceptDialogCloseHandler = () => {
+  const prepTimeInMs = preparedIn * 60 * 1000;
+  const nowInMs = new Date().getTime();
+
+  const dateTimeAfterPrepTime = prepTimeInMs + nowInMs;
+  const onOpen = () => {
     setOpen(false);
   };
-  const setTimeHandler = (event: any, time: number) => {
-    event.preventDefault();
-    event.stopPropagation();
-    if (time) setNewPrepTime(time);
-    else setNewPrepTime(event.target.value);
-  };
-  const acceptHandler = () => {
+
+  const omClose = () => {
     setOpen(true);
   };
   return (
@@ -93,28 +94,13 @@ const DetailCompletedFooter = ({
           borderRadius="8px"
           marginBottom="10px"
         >
-          <Typography
-            fontSize="20px"
-            lineHeight="26px"
-            fontWeight={800}
-            fontFamily="DM-sans-bold"
-          >
-            10
-          </Typography>
-          <Typography
-            fontSize="8px"
-            lineHeight="10px"
-            fontWeight={800}
-            fontFamily="DM-sans-bold"
-          >
-            mins
-          </Typography>
+          <CountDownClock targetDate={dateTimeAfterPrepTime} />
         </Box>
         <Box width="100%" height="30%">
           <Button
             variant="contained"
             sx={{ width: "100%", height: "100%", borderRadius: "8px" }}
-            onClick={acceptHandler}
+            onClick={onOpen}
           >
             <FactoryButtonContent deliveryType={deliveryType} />
           </Button>

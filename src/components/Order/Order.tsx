@@ -26,6 +26,11 @@ import {
 } from "@mui/material";
 import { OrderModel } from "../../types";
 import OrderItem from "./OrderItem/OrderItem";
+import OrderSection from "./OrderSection";
+const pendingStatus: number[] = [0];
+const acceptedStatus: number[] = [1, 3, 6, 7];
+const completedStatus: number[] = [10, 11, 12, 13];
+
 const Order = () => {
   const { businessId } = useAppSelector(selectSession);
   const { socket, error, connected } = useSocket("http://localhost:5000/");
@@ -43,7 +48,7 @@ const Order = () => {
       if (!socket) {
         return <h1>Loading ...</h1>;
       }
-      if (!open) stop() 
+      if (!open) stop();
       else playBoop();
       onHandleModal();
       setNewOrder(socket);
@@ -62,7 +67,7 @@ const Order = () => {
     setOpen(true);
     playBoop();
   };
-  if (!open) stop() 
+  if (!open) stop();
   return (
     <OrderContainer>
       <Box
@@ -71,10 +76,9 @@ const Order = () => {
         gap={2}
         sx={{ width: "100%", padding: "10px" }}
       >
-        <Box gridColumn="span 6" className={styles.section__container}>
-          <OrderTitle title={"Pending"} quantity={8} />
-          <OrderList />
-        </Box>
+        <OrderSection status={pendingStatus} isCompleted={false} span={6} />
+        <OrderSection status={acceptedStatus} isCompleted={false} span={6} />
+        <OrderSection status={completedStatus} isCompleted={false} span={2} />
 
         {/* Accepted */}
 

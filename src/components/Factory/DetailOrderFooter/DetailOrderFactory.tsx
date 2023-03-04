@@ -10,6 +10,7 @@ interface OrderDetailBoardRightFooterProps {
   orderStatus: number;
   deliveryType: number;
   orderId: number;
+  preparedIn: number;
 }
 
 const DetailOrderFactory = ({
@@ -17,6 +18,7 @@ const DetailOrderFactory = ({
   orderStatus,
   deliveryType,
   orderId,
+  preparedIn,
 }: OrderDetailBoardRightFooterProps) => {
   switch (orderStatus) {
     case OrderEnum.ACCEPTED_BY_DRIVER:
@@ -27,6 +29,7 @@ const DetailOrderFactory = ({
             deliveryType={deliveryType}
             orderStatus={orderStatus}
             orderId={orderId}
+            preparedIn={preparedIn}
           />
         </Box>
       );
@@ -50,6 +53,7 @@ const DetailOrderFactory = ({
             deliveryType={deliveryType}
             orderStatus={orderStatus}
             orderId={orderId}
+            preparedIn={preparedIn}
           />
         </Box>
       );

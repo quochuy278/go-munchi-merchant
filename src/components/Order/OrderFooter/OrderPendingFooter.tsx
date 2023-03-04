@@ -2,20 +2,15 @@ import React, { useState } from "react";
 import { Box, Button, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import FactoryDialog from "../../Dialog/Dialog";
-
-interface FooterProps {
-  prepTime: number;
-  orderId: number;
-  orderStatus: number;
-  deliveryType: number;
-}
+import { OrderFooterProps } from "../../../types";
 
 const OrderPendingFooter = ({
   orderStatus,
   orderId,
   prepTime,
   deliveryType,
-}: FooterProps) => {
+  status,
+}: OrderFooterProps) => {
   const [newPrepTime, setNewPrepTime] = useState(10);
   const presetPreparationTimes = [5, 10, 30];
   const setTimeHandler = (event: any, time: number) => {

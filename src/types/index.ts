@@ -1,4 +1,4 @@
-export type Order = {
+export type OrderModel = {
   id: number;
   status: number;
   summary: Summary;
@@ -30,4 +30,19 @@ export interface Product {
   price: number;
   quantity: number;
   comment: string | null;
+}
+
+
+export interface UpdateOrderData {
+  orderId: number;
+  newPrepTime?: number;
+  orderStatus: number;
+}
+
+export interface OrderFooterProps {
+  prepTime: number;
+  orderId: number;
+  orderStatus: number;
+  deliveryType: number;
+  status: number;
 }

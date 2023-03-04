@@ -1,12 +1,7 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
-import { Order } from "../../../types";
-import OrderItem from "../OrderItem/OrderItem";
-import { useAppSelector } from "../../../store/hooks";
-import { selectSession } from "../../../store/slices/session";
-import { getUrl } from "../../../utils/getEnvUrl";
-import { useGetFilteredOrderQuery } from "../../../store/slices/api";
+import { OrderModel } from "../../../types";
 import FullscreenLoading from "../../Loading/FullscreenLoading";
+import OrderItem from "../OrderItem/OrderItem";
 
 export interface FilterQuery {
   publicBusinessId: string;
@@ -14,30 +9,15 @@ export interface FilterQuery {
   paramsQuery: string[] | string;
 }
 
-const OrderList = () => {
-  const { businessId, publicUserId } = useAppSelector(selectSession);
-  const filterData: FilterQuery = {
-    publicBusinessId: businessId! as string,
-    query: '{"status":[0,2,5,7]}',
-    paramsQuery: [
-      "id",
-      "business_id",
-      "prepared_in",
-      "customer_id",
-      "status",
-      "delivery_type",
-      "delivery_datetime",
-      "products",
-      "summary",
-      "customer",
-      "created_at",
-    ].join(","),
-  };
-  const { data, isFetching, isLoading, isError, error } =
-    useGetFilteredOrderQuery(filterData);
-  if (isFetching || isLoading) {
+interface OrderListProps {
+  orders: OrderModel[];
+}
+
+const OrderList = ({ orders }: OrderListProps) => {
+  if (!orders) {
     return <FullscreenLoading />;
   }
+
   return (
     <Box
       display="grid"
@@ -45,11 +25,23 @@ const OrderList = () => {
       gap={2}
       paddingX={2}
     >
-      <>
-        {data.map((order: Order) => {
-          return <OrderItem order={order} key={order.id} />;
-        })}
-      </>
+      {orders?.length === 0 ? (
+        <Box
+          width="100%"
+          height="50vh"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Typography> No orders for now</Typography>
+        </Box>
+      ) : (
+        <>
+          {orders.map((order: OrderModel) => {
+            return <OrderItem order={order} key={order.id} />;
+          })}
+        </>
+      )}
     </Box>
   );
 };

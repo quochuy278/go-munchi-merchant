@@ -1,14 +1,14 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Order } from "../../../types";
+import { OrderModel } from "../../../types";
 import { IconFactory } from "../../Factory/icons/IconFactory";
 import OrderFactory from "../../Factory/order/OrderFactory";
 import ProductFactory from "../../Factory/product/ProductFactory";
 
 import styles from "./OrderItem.module.css";
 interface OrderProps {
-  order: Order;
+  order: OrderModel;
 }
 const OrderItem = ({ order }: OrderProps) => {
   return (
@@ -73,6 +73,7 @@ const OrderItem = ({ order }: OrderProps) => {
         orderId={order.id}
         deliveryType={order.deliveryType}
         prepTime={order.preparedIn}
+        status={order.status}
       />
     </Box>
   );
