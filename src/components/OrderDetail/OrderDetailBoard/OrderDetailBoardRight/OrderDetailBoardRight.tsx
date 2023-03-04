@@ -5,7 +5,7 @@ import styles from "./OrderDetailBoardRight.module.css";
 import DetailOrderFactory from "../../../Factory/DetailOrderFooter/DetailOrderFactory";
 
 export const OrderDetailBoardRight = ({ data }: any) => {
-  const { customer, createdAt, status, deliveryType, id } = data;
+  const { customer, createdAt, status, deliveryType, id, preparedIn } = data;
   console.log(data)
   return (
     <Box gridColumn="span 6" className={styles.detail__info__container}>
@@ -19,6 +19,7 @@ export const OrderDetailBoardRight = ({ data }: any) => {
           orderStatus={status}
           deliveryType={deliveryType}
           orderId={id}
+          preparedIn={preparedIn}
         />
       </Box>
     </Box>

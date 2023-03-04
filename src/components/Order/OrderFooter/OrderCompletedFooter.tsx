@@ -33,7 +33,8 @@ const OrderCompletedFooter = ({
   orderId,
   prepTime,
   deliveryType,
-}: FooterProps) => {
+  status
+}: OrderFooterProps) => {
   const [open, setOpen] = useState(false);
   const acceptHandler = () => {
     setOpen(true);
@@ -57,7 +58,7 @@ const OrderCompletedFooter = ({
           deliveryType: deliveryType,
           orderId: orderId,
           status: orderStatus,
-          newPrepTime: 25 as number
+          newPrepTime: 25 as number,
         }}
       />
     </>
