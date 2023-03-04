@@ -1,6 +1,7 @@
 import { Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
+import { OrderFooterProps } from "../../../types";
 import FactoryDialog from "../../Dialog/Dialog";
 const CustomReadyButton = styled(Button)(({ theme }) => ({
   textAlign: "center",
@@ -21,12 +22,7 @@ const CustomReadyButton = styled(Button)(({ theme }) => ({
     border: "none",
   },
 }));
-interface FooterProps {
-  prepTime: number;
-  orderId: number;
-  orderStatus: number;
-  deliveryType: number;
-}
+
 
 const OrderCompletedFooter = ({
   orderStatus,

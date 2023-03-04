@@ -7,6 +7,7 @@ export interface DetailFooterProps {
   orderStatus: number;
   deliveryType: number;
   orderId: number;
+  preparedIn:number
 }
 
 const DetailCompletedFooter = ({

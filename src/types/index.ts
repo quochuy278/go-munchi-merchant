@@ -1,4 +1,4 @@
-export type Order = {
+export type OrderModel = {
   id: number;
   status: number;
   summary: Summary;
