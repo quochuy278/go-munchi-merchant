@@ -9,7 +9,6 @@ interface FooterProps {
 }
 
 export const LeftBoardFooter = ({ summary }: FooterProps) => {
-  console.log(summary);
   return (
     <Box className={styles.payment_content}>
       <Box sx={{ width: "100%" }}>
