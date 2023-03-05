@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button } from "@mui/material";
 import styles from "./DetailFooter.module.css";
+import FactoryDialog from "../../../../Dialog/Dialog";
 export interface DetailFooterProps {
   timeStamp: string;
   orderStatus: number;
@@ -31,11 +32,11 @@ const DetailPendingFooter = ({
     }
   };
 
-  const acceptHandler = () => {
+  const onOpen = () => {
     setOpen(true);
   };
 
-  const acceptDialogCloseHandler = () => {
+  const onClose = () => {
     setOpen(false);
   };
   return (
@@ -229,19 +230,21 @@ const DetailPendingFooter = ({
                 color: "white",
               },
             }}
-            onClick={acceptHandler}
+            onClick={onOpen}
           >
             <Typography>Accept</Typography>
           </Button>
-          {/* <DialogAlert
-              open={open}
-              newPrepTime={newPrepTime}
-              onClose={acceptDialogCloseHandler}
-              orderId={orderId}
-              deliveryType={deliveryType}
-              orderStatus={orderStatus}
-              prepTime={newPrepTime}
-            /> */}
+          <FactoryDialog
+            isOrder={true}
+            open={open}
+            onClose={onClose}
+            modalData={{
+              deliveryType: deliveryType,
+              orderId: orderId,
+              status: orderStatus,
+              newPrepTime: newPrepTime,
+            }}
+          />
         </Box>
       </Box>
     </>
