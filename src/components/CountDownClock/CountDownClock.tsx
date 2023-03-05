@@ -1,7 +1,5 @@
-import { Typography, Box } from "@mui/material";
-import { useState } from "react";
 import { useCountdown } from "../../hooks/useCountDown";
-import { TimeFormatFactory } from "../Factory/time/TimeFormatFactory";
+import { TimeFormatFactory } from "../Factory/Time/TimeFormatFactory";
 
 interface ClockProps {
   targetDate: number;
