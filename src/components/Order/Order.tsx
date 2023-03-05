@@ -76,9 +76,9 @@ const Order = () => {
         gap={2}
         sx={{ width: "100%", padding: "10px" }}
       >
-        <OrderSection status={pendingStatus} isCompleted={false} span={6} />
-        <OrderSection status={acceptedStatus} isCompleted={false} span={6} />
-        <OrderSection status={completedStatus} isCompleted={false} span={2} />
+        <OrderSection status={pendingStatus} isCompleted={false} span={6} title={'Pending'}/>
+        <OrderSection status={acceptedStatus} isCompleted={false} span={6} title={'On Progress'}/>
+        <OrderSection status={completedStatus} isCompleted={true} span={2} title={'Completed'}/>
 
         {/* Accepted */}
 

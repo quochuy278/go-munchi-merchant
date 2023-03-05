@@ -12,9 +12,15 @@ interface OrderSectionProps {
   status: number[];
   isCompleted: boolean;
   span: number;
+  title: string;
 }
 
-const OrderSection = ({ status, isCompleted, span }: OrderSectionProps) => {
+const OrderSection = ({
+  status,
+  isCompleted,
+  span,
+  title,
+}: OrderSectionProps) => {
   const { businessId } = useAppSelector(selectSession);
   const filterData: FilterQuery = {
     publicBusinessId: businessId! as string,
@@ -42,17 +48,16 @@ const OrderSection = ({ status, isCompleted, span }: OrderSectionProps) => {
       </Box>
     );
   }
-
   return (
     <>
       {isCompleted ? (
-        <Box gridColumn="span 2" className={styles.section__container}>
-          <OrderTitle title={"Pending"} quantity={data.length} />
+        <Box gridColumn={`span ${span}`} className={styles.section__container}>
+          <OrderTitle title={title} quantity={data.length} />
           <OrderCompleteList orders={data} />
         </Box>
       ) : (
-        <Box gridColumn="span 6" className={styles.section__container}>
-          <OrderTitle title={"Pending"} quantity={data.length} />
+        <Box gridColumn={`span ${span}`} className={styles.section__container}>
+          <OrderTitle title={title} quantity={data.length} />
           <OrderList orders={data} />
         </Box>
       )}
