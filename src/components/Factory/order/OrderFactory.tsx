@@ -1,13 +1,11 @@
 import React from "react";
 import { OrderFooterProps } from "../../../types";
 import { OrderEnum } from "../../../types/enum/enum";
+import { acceptedStatus, completedStatus, pendingStatus } from "../../Order/Order";
 import OrderAcceptedFooter from "../../Order/OrderFooter/OrderAcceptedFooter";
 import OrderCompletedFooter from "../../Order/OrderFooter/OrderCompletedFooter";
 import OrderPendingFooter from "../../Order/OrderFooter/OrderPendingFooter";
 
-const pendingStatus: number[] = [0];
-const acceptedStatus: number[] = [1, 3, 6, 7];
-const completedStatus: number[] = [10, 11, 12, 13];
 
 const OrderFactory = ({
   orderStatus,

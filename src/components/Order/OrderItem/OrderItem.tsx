@@ -3,8 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { OrderModel } from "../../../types";
 import { IconFactory } from "../../Factory/icons/IconFactory";
-import OrderFactory from "../../Factory/order/OrderFactory";
-import ProductFactory from "../../Factory/product/ProductFactory";
+import OrderFactory from "../../Factory/Order/OrderFactory";
+import ProductFactory from "../../Factory/Product/ProductFactory";
 
 import styles from "./OrderItem.module.css";
 interface OrderProps {
