@@ -6,7 +6,6 @@ import DetailOrderFactory from "../../../Factory/DetailOrderFooter/DetailOrderFa
 
 export const OrderDetailBoardRight = ({ data }: any) => {
   const { customer, createdAt, status, deliveryType, id, preparedIn } = data;
-  console.log(data)
   return (
     <Box gridColumn="span 6" className={styles.detail__info__container}>
       <OrderDetailBoardRightList

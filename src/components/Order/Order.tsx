@@ -26,10 +26,11 @@ import {
 } from "@mui/material";
 import { OrderModel } from "../../types";
 import OrderItem from "./OrderItem/OrderItem";
-import OrderSection from "./OrderSection";
-const pendingStatus: number[] = [0];
-const acceptedStatus: number[] = [1, 3, 6, 7];
-const completedStatus: number[] = [10, 11, 12, 13];
+import OrderSection from "./OrderSection/OrderSection";
+
+export const pendingStatus: number[] = [0];
+export const acceptedStatus: number[] = [1, 3, 6, 7];
+export const completedStatus: number[] = [10, 11, 12, 13];
 
 const Order = () => {
   const { businessId } = useAppSelector(selectSession);
@@ -76,9 +77,24 @@ const Order = () => {
         gap={2}
         sx={{ width: "100%", padding: "10px" }}
       >
-        <OrderSection status={pendingStatus} isCompleted={false} span={6} title={'Pending'}/>
-        <OrderSection status={acceptedStatus} isCompleted={false} span={6} title={'On Progress'}/>
-        <OrderSection status={completedStatus} isCompleted={true} span={2} title={'Completed'}/>
+        <OrderSection
+          status={pendingStatus}
+          isCompleted={false}
+          span={6}
+          title={"Pending"}
+        />
+        <OrderSection
+          status={acceptedStatus}
+          isCompleted={false}
+          span={6}
+          title={"On Progress"}
+        />
+        <OrderSection
+          status={completedStatus}
+          isCompleted={true}
+          span={2}
+          title={"Completed"}
+        />
 
         {/* Accepted */}
 

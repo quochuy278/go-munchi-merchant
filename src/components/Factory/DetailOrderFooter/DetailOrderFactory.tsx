@@ -1,6 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { OrderEnum } from "../../../types/enum/enum";
+import {
+  acceptedStatus,
+  completedStatus,
+  pendingStatus,
+} from "../../Order/Order";
 import DetailCompletedFooter from "../../OrderDetail/OrderDetailBoard/OrderDetailBoardRight/OrderDetailFooter/DetailCompletedFooter";
 import DetailPendingFooter from "../../OrderDetail/OrderDetailBoard/OrderDetailBoardRight/OrderDetailFooter/DetailPendingFooter";
 import styles from "./DetailOrderFactory.module.css";
@@ -20,8 +25,8 @@ const DetailOrderFactory = ({
   orderId,
   preparedIn,
 }: OrderDetailBoardRightFooterProps) => {
-  switch (orderStatus) {
-    case OrderEnum.ACCEPTED_BY_DRIVER:
+  switch (true) {
+    case acceptedStatus.includes(orderStatus):
       return (
         <Box className={styles.detail_footer_container}>
           <DetailCompletedFooter
@@ -34,7 +39,7 @@ const DetailOrderFactory = ({
         </Box>
       );
 
-    case OrderEnum.PENDING:
+    case pendingStatus.includes(orderStatus):
       return (
         <Box className={styles.detail_footer_container}>
           <DetailPendingFooter
@@ -45,7 +50,7 @@ const DetailOrderFactory = ({
           />
         </Box>
       );
-    case OrderEnum.COMPLETED:
+    case acceptedStatus.includes(orderStatus):
       return (
         <Box className={styles.detail_footer_container}>
           <DetailCompletedFooter

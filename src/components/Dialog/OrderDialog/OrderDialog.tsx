@@ -13,6 +13,10 @@ import {
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
+import { boolean } from "zod";
+import { useUpdateOrderMutation } from "../../../store/slices/api";
+import { UpdateOrderData } from "../../../types";
+import { acceptedStatus, pendingStatus } from "../../Order/Order";
 import { OrderDialogProps } from "../Dialog";
 
 const orderStatuses = [
@@ -114,10 +118,18 @@ const orderStatuses = [
   },
 ];
 const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
+  const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation();
   const [status, setStatus] = useState<number>(0);
-  const handleMaxWidthChange = (event: SelectChangeEvent<typeof status>) => {
+  const handleOrderStatusChange = (event: SelectChangeEvent<typeof status>) => {
     setStatus(event.target.value as number);
   };
+
+  const onUpdateOrder = async (newOrderData: UpdateOrderData) => {
+    console.log("triggered");
+    await updateOrder(newOrderData);
+    onClose();
+  };
+  console.log(modalData, "Order dialog");
   // console.log(modalData, "line 125");
   if (!modalData) {
     return (
@@ -127,9 +139,9 @@ const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
     );
   }
 
-  return (
-    <>
-      {modalData.newPrepTime ? (
+  switch (true) {
+    case pendingStatus.includes(modalData.status):
+      return (
         <Dialog open={open} fullWidth={true} maxWidth={"sm"}>
           <DialogTitle>Confirmation</DialogTitle>
           <DialogContent>
@@ -140,13 +152,31 @@ const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
               Your preparation time: {modalData.newPrepTime}
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={onClose}>Close</Button>
-            <Button onClick={onClose}>Confirm</Button>
-          </DialogActions>
+          {isUpdating ? (
+            <LinearProgress color="secondary" />
+          ) : (
+            <DialogActions>
+              <Button onClick={onClose}>Close</Button>
+              <Button
+                onClick={() =>
+                  onUpdateOrder({
+                    orderId: modalData.orderId,
+                    newPrepTime: modalData.newPrepTime,
+                    orderStatus: 7,
+                  })
+                }
+              >
+                Confirm
+              </Button>
+            </DialogActions>
+          )}
+
           {/* <LinearProgress color="secondary" /> */}
         </Dialog>
-      ) : (
+      );
+
+    case acceptedStatus.includes(modalData.status):
+      return (
         <Dialog open={open} fullWidth={true} maxWidth={"sm"}>
           <DialogTitle>Confirmation</DialogTitle>
           <DialogContent>
@@ -169,7 +199,7 @@ const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
                 <Select
                   autoFocus
                   variant="outlined"
-                  onChange={handleMaxWidthChange}
+                  onChange={handleOrderStatusChange}
                   value={status}
                   label="Status"
                   inputProps={{
@@ -189,15 +219,114 @@ const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
               </FormControl>
             </Box>
           </DialogContent>
+          {isUpdating ? (
+            <LinearProgress color="secondary" />
+          ) : (
+            <DialogActions>
+              <Button onClick={onClose}>Close</Button>
+              <Button
+                onClick={() =>
+                  onUpdateOrder({
+                    orderId: modalData.orderId,
+                    newPrepTime: modalData.newPrepTime,
+                    orderStatus: status,
+                  })
+                }
+              >
+                Confirm
+              </Button>
+            </DialogActions>
+          )}
+
+          {/*  */}
+        </Dialog>
+      );
+    default:
+      return (
+        <Dialog open={open} fullWidth={true} maxWidth={"sm"}>
+          <DialogTitle>Error</DialogTitle>
+          <DialogContent>
+            <DialogContentText>Something wrong happend</DialogContentText>{" "}
+          </DialogContent>
           <DialogActions>
             <Button onClick={onClose}>Close</Button>
             <Button onClick={onClose}>Confirm</Button>
           </DialogActions>
           {/* <LinearProgress color="secondary" /> */}
         </Dialog>
-      )}
-    </>
-  );
+      );
+  }
+  // return (
+  //   <>
+  //     {modalData.newPrepTime ? (
+  //       <Dialog open={open} fullWidth={true} maxWidth={"sm"}>
+  //         <DialogTitle>Confirmation</DialogTitle>
+  //         <DialogContent>
+  //           <DialogContentText>
+  //             Please confirm that you accept order
+  //           </DialogContentText>{" "}
+  //           <DialogContentText>
+  //             Your preparation time: {modalData.newPrepTime}
+  //           </DialogContentText>
+  //         </DialogContent>
+  //         <DialogActions>
+  //           <Button onClick={onClose}>Close</Button>
+  //           <Button onClick={onClose}>Confirm</Button>
+  //         </DialogActions>
+  //         {/* <LinearProgress color="secondary" /> */}
+  //       </Dialog>
+  //     ) : (
+  //       <Dialog open={open} fullWidth={true} maxWidth={"sm"}>
+  //         <DialogTitle>Confirmation</DialogTitle>
+  //         <DialogContent>
+  //           <DialogContentText>
+  //             Please select the status you want to change
+  //           </DialogContentText>{" "}
+  //           <Box
+  //             noValidate
+  //             component="form"
+  //             sx={{
+  //               display: "flex",
+  //               flexDirection: "column",
+  //               m: "auto",
+  //               width: "fit-content",
+  //             }}
+  //           >
+  //             <FormControl sx={{ mt: 2, minWidth: 120 }}>
+  //               <InputLabel htmlFor="status">Status</InputLabel>
+
+  //               <Select
+  //                 autoFocus
+  //                 variant="outlined"
+  //                 onChange={handleOrderStatusChange}
+  //                 value={status}
+  //                 label="Status"
+  //                 inputProps={{
+  //                   name: "status",
+  //                   id: "status",
+  //                 }}
+  //                 autoWidth
+  //               >
+  //                 {orderStatuses.map((orderStatus, index: number) => {
+  //                   return (
+  //                     <MenuItem value={orderStatus.value} key={index}>
+  //                       {orderStatus.status}
+  //                     </MenuItem>
+  //                   );
+  //                 })}
+  //               </Select>
+  //             </FormControl>
+  //           </Box>
+  //         </DialogContent>
+  //         <DialogActions>
+  //           <Button onClick={onClose}>Close</Button>
+  //           <Button onClick={onClose}>Confirm</Button>
+  //         </DialogActions>
+  //         {/* <LinearProgress color="secondary" /> */}
+  //       </Dialog>
+  //     )}
+  //   </>
+  // );
 };
 
 export default OrderDialog;

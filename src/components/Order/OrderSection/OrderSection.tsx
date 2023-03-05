@@ -1,13 +1,14 @@
 import React from "react";
-import OrderList, { FilterQuery } from "./OrderList/OrderList";
-import OrderTitle from "./OrderTitle/OrderTitle";
 import { Box } from "@mui/material";
 import styles from "./OrderSection.module.css";
-import { useAppSelector } from "../../store/hooks";
-import { selectSession } from "../../store/slices/session";
-import { useGetFilteredOrderQuery } from "../../store/slices/api";
-import FullscreenLoading from "../Loading/FullscreenLoading";
-import OrderCompleteList from "./OrderCompleteList/OrderCompleteList";
+import OrderList, { FilterQuery } from "../OrderList/OrderList";
+import { useAppSelector } from "../../../store/hooks";
+import { selectSession } from "../../../store/slices/session";
+import { useGetFilteredOrderQuery } from "../../../store/slices/api";
+import FullscreenLoading from "../../Loading/FullscreenLoading";
+import OrderTitle from "../OrderTitle/OrderTitle";
+import OrderCompleteList from "../OrderCompleteList/OrderCompleteList";
+
 interface OrderSectionProps {
   status: number[];
   isCompleted: boolean;
