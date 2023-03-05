@@ -28,7 +28,7 @@ const OrderCompleteItem = ({ order }: any) => {
         border="0.5px solid #d7d7d7"
         borderRadius="5px"
       >
-        <DiningIcon sx={{ width: "16px", height: "14px", marginX: 0.2 }} />
+        <DiningIcon sx={{ width: "16px", height: "14px", marginX: 0.3, }} />
         <Typography fontSize="10px" lineHeight="13px">
           Takeaway
         </Typography>
