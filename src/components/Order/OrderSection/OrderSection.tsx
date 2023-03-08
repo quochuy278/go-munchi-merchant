@@ -8,7 +8,7 @@ import { useGetFilteredOrderQuery } from "../../../store/slices/api";
 import FullscreenLoading from "../../Loading/FullscreenLoading";
 import OrderTitle from "../OrderTitle/OrderTitle";
 import OrderCompleteList from "../OrderCompleteList/OrderCompleteList";
-
+import CenterContainer from "../../Container/CenterContainer";
 interface OrderSectionProps {
   status: number[];
   isCompleted: boolean;
@@ -46,6 +46,16 @@ const OrderSection = ({
     return (
       <Box gridColumn={`span ${span}`} className={styles.section__container}>
         <FullscreenLoading />
+      </Box>
+    );
+  }
+  if (error || isError) {
+    console.log(error)
+    return (
+      <Box gridColumn={`span ${span}`} className={styles.section__container}>
+        <CenterContainer>
+          Something wrong happened , can't fetch data properly
+        </CenterContainer>
       </Box>
     );
   }
