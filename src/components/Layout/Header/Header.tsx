@@ -24,7 +24,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearSessionState } from "../../../utils/preference";
-import { clear as clearReduxSessionState } from "../../../store/slices/session";
+import { clearSessionState as clearSessionRedux } from "../../../store/slices/session";
 import { Link } from "react-router-dom";
 
 type Anchor = "top" | "left" | "bottom" | "right";
@@ -59,7 +59,7 @@ export default function Header({ loginData }: any) {
     // };
     // console.log("clear session state", sessionState);
     await clearSessionState();
-    dispatch(clearReduxSessionState());
+    dispatch(clearSessionRedux());
   };
   const navItems = [
     {
