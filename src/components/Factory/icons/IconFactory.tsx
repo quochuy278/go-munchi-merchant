@@ -6,15 +6,6 @@ import { DeliveryEnum } from "../../../types/enum/enum";
 
 export const IconFactory = ({ orderType }: any) => {
   switch (orderType) {
-    case DeliveryEnum.PICK_UP:
-      return (
-        <Box display="flex">
-          <DiningIcon sx={{ width: "16px", height: "14px", marginX: 1 }} />
-          <Typography fontSize="10px" lineHeight="13px">
-            delivery_type 2
-          </Typography>
-        </Box>
-      );
     case DeliveryEnum.DELIVERY:
       return (
         <Box display="flex">
@@ -22,10 +13,20 @@ export const IconFactory = ({ orderType }: any) => {
             sx={{ width: "16px", height: "14px", marginX: 1 }}
           />
           <Typography fontSize="10px" lineHeight="13px">
-            delivery_type 1
+            Delivery
           </Typography>
         </Box>
       );
+    case DeliveryEnum.PICK_UP:
+      return (
+        <Box display="flex">
+          <DiningIcon sx={{ width: "16px", height: "14px", marginX: 1 }} />
+          <Typography fontSize="10px" lineHeight="13px">
+            Pick up
+          </Typography>
+        </Box>
+      );
+
     case DeliveryEnum.EATIN:
       return (
         <Box display="flex">
@@ -33,12 +34,32 @@ export const IconFactory = ({ orderType }: any) => {
             sx={{ width: "16px", height: "14px", marginX: 1 }}
           />
           <Typography fontSize="10px" lineHeight="13px">
-            delivery_type 3
+            Eat in
           </Typography>
         </Box>
       );
-    case null:
-      return null;
+    case DeliveryEnum.CURBSIDE:
+      return (
+        <Box display="flex">
+          <TakeoutDiningOutlinedIcon
+            sx={{ width: "16px", height: "14px", marginX: 1 }}
+          />
+          <Typography fontSize="10px" lineHeight="13px">
+            Curbside
+          </Typography>
+        </Box>
+      );
+    case DeliveryEnum.DRIVER_THRU:
+      return (
+        <Box display="flex">
+          <TakeoutDiningOutlinedIcon
+            sx={{ width: "16px", height: "14px", marginX: 1 }}
+          />
+          <Typography fontSize="10px" lineHeight="13px">
+            Drive
+          </Typography>
+        </Box>
+      );
     default:
       return (
         <Box display="flex">
@@ -46,7 +67,7 @@ export const IconFactory = ({ orderType }: any) => {
             sx={{ width: "16px", height: "14px", marginX: 1 }}
           />
           <Typography fontSize="10px" lineHeight="13px">
-            delivery_type 0
+            Some thing wrong happend
           </Typography>
         </Box>
       );

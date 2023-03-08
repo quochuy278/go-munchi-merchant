@@ -17,7 +17,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { setSessionState } from "../../utils/preference";
 import { useAppDispatch } from "../../store/hooks";
-import { set as setReduxSessionState } from "../../store/slices/session";
+import { setSessionState as setReduxSessionState } from "../../store/slices/session";
 import { useNavigate } from "react-router-dom";
 import { SignInData, useSignInMutation } from "../../store/slices/api";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -52,6 +52,7 @@ const LoginForm = () => {
     const sessionState = {
       publicUserId: response.data.publicId,
       verifyToken: response.data.verifyToken,
+      refreshToken: response.data.refreshToken,
       isAuthenticated: true,
     };
     // console.log("set session state", sessionState);

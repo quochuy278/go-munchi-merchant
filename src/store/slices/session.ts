@@ -6,6 +6,7 @@ interface SessionState {
   businessId: string | null;
   publicUserId: string | null;
   verifyToken: string | null;
+  refreshToken: string | null;
 }
 
 const defaultState: SessionState = {
@@ -13,26 +14,27 @@ const defaultState: SessionState = {
   businessId: null,
   publicUserId: null,
   verifyToken: null,
+  refreshToken: null,
 };
 
 export const sessionSlice = createSlice({
   name: "session",
   initialState: defaultState,
   reducers: {
-    set: (state, action: PayloadAction<any>) => {
+    setSessionState: (state, action: PayloadAction<any>) => {
       return { ...state, ...action.payload };
     },
     setBussinessId: (state, action: PayloadAction<string>) => {
       state.businessId = action.payload;
     },
-    clear: (state) => {
+    clearSessionState: (state) => {
       return { ...defaultState, init: true };
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { set, clear, setBussinessId } = sessionSlice.actions;
+export const { setSessionState, clearSessionState, setBussinessId } = sessionSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectSessionInit = (state: RootState) => state.session.init;

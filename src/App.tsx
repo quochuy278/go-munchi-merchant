@@ -10,7 +10,7 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { useAppSelector, useAppDispatch } from "./store/hooks";
 import {
   selectSession,
-  set as setSessionState,
+ setSessionState,
   setBussinessId,
 } from "./store/slices/session";
 import { useEffect } from "react";
@@ -27,7 +27,6 @@ function App() {
   // The `state` arg is correctly typed as `RootState` already
   const { init, publicUserId } = useAppSelector(selectSession);
   const dispatch = useAppDispatch();
-  console.log("App render");
   const checkPermission = async () => {
     let permission = await LocalNotifications.checkPermissions();
     if (permission.display === "prompt") {
