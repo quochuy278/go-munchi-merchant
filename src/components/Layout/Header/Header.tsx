@@ -22,6 +22,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
   usePostActivateBusinessMutation,
@@ -34,7 +35,7 @@ import {
 } from "../../../store/slices/session";
 import { addSessionState, clearSessionState } from "../../../utils/preference";
 import CenterContainer from "../../Container/CenterContainer";
-
+import styles from './Header.module.css'
 type Anchor = "top" | "left" | "bottom" | "right";
 
 export default function Header({ loginData }: any) {
@@ -53,12 +54,10 @@ export default function Header({ loginData }: any) {
     postDeactivateBusiness,
     { isLoading: isDeactivate, isSuccess: deactivateSucess },
   ] = usePostDeactivateBusinessMutation();
- 
 
   if (!businessId) {
     return <CenterContainer>Something wrong happened</CenterContainer>;
   }
-
 
   const loading = isActivate || isDeactivate;
   const toggleDrawer =
@@ -78,7 +77,7 @@ export default function Header({ loginData }: any) {
 
   const onActivateBusiness = async () => {
     setIsOpen((prevState) => !prevState);
-    console.log(isOpen)
+    console.log(isOpen);
     postActivateBusiness(businessId);
     dispatch(setBusinessStatus(isOpen));
     await addSessionState({
@@ -89,7 +88,7 @@ export default function Header({ loginData }: any) {
   };
   const onDeactivateBusiness = async () => {
     setIsOpen((prevState) => !prevState);
-    console.log(isOpen)
+    console.log(isOpen);
     postDeactivateBusiness(businessId);
     dispatch(setBusinessStatus(isOpen));
     await addSessionState({
@@ -102,6 +101,9 @@ export default function Header({ loginData }: any) {
   const handleLogout = async () => {
     await clearSessionState();
     dispatch(clearSessionRedux());
+  };
+  const handleClick = async () => {
+    console.log("Link");
   };
 
   const onCloseSnackBar = () => {
@@ -118,14 +120,14 @@ export default function Header({ loginData }: any) {
     {
       id: 2,
       primaryText: "Profile",
-      path: "/",
+      path: "/profile",
       onClick: undefined,
       icon: <AccountCircleIcon />,
     },
     {
       id: 3,
       primaryText: "Setting",
-      path: "/",
+      path: "/setting",
       onClick: undefined,
       icon: <SettingsIcon />,
     },
@@ -161,10 +163,12 @@ export default function Header({ loginData }: any) {
         {navItems.map((item) => {
           return (
             <ListItem key={item.primaryText} disablePadding>
-              <ListItemButton onClick={item.onClick}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.primaryText} />
-              </ListItemButton>
+              <Link to={item.path} onClick={handleClick} key={item.primaryText} className={styles.nav__link__item}>
+                <ListItemButton onClick={item.onClick}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.primaryText} />
+                </ListItemButton>
+              </Link>
             </ListItem>
           );
         })}
