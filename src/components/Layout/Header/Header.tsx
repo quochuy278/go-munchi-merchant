@@ -35,25 +35,21 @@ import {
 } from "../../../store/slices/session";
 import { addSessionState, clearSessionState } from "../../../utils/preference";
 import CenterContainer from "../../Container/CenterContainer";
-import styles from './Header.module.css'
+import styles from "./Header.module.css";
 type Anchor = "top" | "left" | "bottom" | "right";
 
 export default function Header({ loginData }: any) {
   const dispatch = useAppDispatch();
-  const { businessId, enabled } = useAppSelector(selectSession);
+  const { businessId, enabled, businessName } = useAppSelector(selectSession);
   const [isOpen, setIsOpen] = useState<boolean>(enabled as boolean);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [state, setState] = useState({
     left: false,
   });
-  const [
-    postActivateBusiness,
-    { isLoading: isActivate, isSuccess: activateSucess },
-  ] = usePostActivateBusinessMutation();
-  const [
-    postDeactivateBusiness,
-    { isLoading: isDeactivate, isSuccess: deactivateSucess },
-  ] = usePostDeactivateBusinessMutation();
+  const [postActivateBusiness, { isLoading: isActivate }] =
+    usePostActivateBusinessMutation();
+  const [postDeactivateBusiness, { isLoading: isDeactivate }] =
+    usePostDeactivateBusinessMutation();
 
   if (!businessId) {
     return <CenterContainer>Something wrong happened</CenterContainer>;
@@ -102,10 +98,6 @@ export default function Header({ loginData }: any) {
     await clearSessionState();
     dispatch(clearSessionRedux());
   };
-  const handleClick = async () => {
-    console.log("Link");
-  };
-
   const onCloseSnackBar = () => {
     setSnackBarOpen(false);
   };
@@ -163,7 +155,11 @@ export default function Header({ loginData }: any) {
         {navItems.map((item) => {
           return (
             <ListItem key={item.primaryText} disablePadding>
-              <Link to={item.path} onClick={handleClick} key={item.primaryText} className={styles.nav__link__item}>
+              <Link
+                to={item.path}
+                key={item.primaryText}
+                className={styles.nav__link__item}
+              >
                 <ListItemButton onClick={item.onClick}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.primaryText} />
@@ -210,7 +206,7 @@ export default function Header({ loginData }: any) {
               width="150px"
             >
               <Typography color={"black"} variant="h4">
-                Munchi
+               Munchi
               </Typography>
             </Box>
             <Box
@@ -222,7 +218,7 @@ export default function Header({ loginData }: any) {
             {/* </IconButton> */}
             <Box display={"flex"} alignItems="center">
               <Typography color={"black"} fontSize="16px" lineHeight="13px">
-                Munchi
+                {businessName}
               </Typography>
 
               <Switch

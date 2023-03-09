@@ -32,7 +32,6 @@ export interface Product {
   comment: string | null;
 }
 
-
 export interface UpdateOrderData {
   orderId: number;
   newPrepTime?: number;
@@ -45,4 +44,9 @@ export interface OrderFooterProps {
   orderStatus: number;
   deliveryType: number;
   status: number;
+}
+
+export interface BusinessData {
+  businessId: string;
+  businessName: string;
 }

@@ -16,12 +16,20 @@ import { setBussinessId } from "../../../store/slices/session";
 import { useAppDispatch } from "../../../store/hooks";
 import { BusinessDialogProps } from "../Dialog";
 const BusinessDialog = ({ modalData, onClose, open }: BusinessDialogProps) => {
-  // console.log(modalData)
+  console.log(modalData);
   const dispatch = useAppDispatch();
   const onConfirm = async () => {
-    const businessState = { businessId: modalData.publicId };
+    const businessState = {
+      businessId: modalData.publicId,
+      businessName: modalData.name,
+    };
     await addSessionState(businessState);
-    dispatch(setBussinessId(businessState.businessId));
+    dispatch(
+      setBussinessId({
+        businessId: businessState.businessId,
+        businessName: businessState.businessName,
+      })
+    );
     onClose();
   };
   if (!modalData) {
