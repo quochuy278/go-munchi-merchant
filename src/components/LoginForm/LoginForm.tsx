@@ -54,6 +54,7 @@ const LoginForm = () => {
       verifyToken: response.data.verifyToken,
       refreshToken: response.data.refreshToken,
       isAuthenticated: true,
+      enabled: false
     };
     // console.log("set session state", sessionState);
     await setSessionState(sessionState);
