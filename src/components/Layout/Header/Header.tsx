@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CircleIcon from "@mui/icons-material/Circle";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import LogoutIcon from "@mui/icons-material/Logout";
+import MenuIcon from "@mui/icons-material/Menu";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import SettingsIcon from "@mui/icons-material/Settings";
 import {
   AppBar,
   Box,
@@ -9,32 +15,52 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Snackbar,
   SwipeableDrawer,
   Switch,
   Toolbar,
   Typography,
 } from "@mui/material";
-import CircleIcon from "@mui/icons-material/Circle";
-import LogoutIcon from "@mui/icons-material/Logout";
-import MailIcon from "@mui/icons-material/Mail";
-import MenuIcon from "@mui/icons-material/Menu";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import SettingsIcon from "@mui/icons-material/Settings";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import { useAppDispatch } from "../../../store/hooks";
-import { clearSessionState } from "../../../utils/preference";
-import { clearSessionState as clearSessionRedux } from "../../../store/slices/session";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import {
+  usePostActivateBusinessMutation,
+  usePostDeactivateBusinessMutation,
+} from "../../../store/slices/api";
+import {
+  clearSessionState as clearSessionRedux,
+  selectSession,
+  setBusinessStatus,
+} from "../../../store/slices/session";
+import { addSessionState, clearSessionState } from "../../../utils/preference";
+import CenterContainer from "../../Container/CenterContainer";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
 export default function Header({ loginData }: any) {
-  const [isOpen, setIsOpen] = useState(false);
-
+  const dispatch = useAppDispatch();
+  const { businessId, enabled } = useAppSelector(selectSession);
+  const [isOpen, setIsOpen] = useState<boolean>(enabled as boolean);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [state, setState] = useState({
     left: false,
   });
+  const [
+    postActivateBusiness,
+    { isLoading: isActivate, isSuccess: activateSucess },
+  ] = usePostActivateBusinessMutation();
+  const [
+    postDeactivateBusiness,
+    { isLoading: isDeactivate, isSuccess: deactivateSucess },
+  ] = usePostDeactivateBusinessMutation();
+ 
+
+  if (!businessId) {
+    return <CenterContainer>Something wrong happened</CenterContainer>;
+  }
+
+
+  const loading = isActivate || isDeactivate;
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -50,16 +76,36 @@ export default function Header({ loginData }: any) {
       setState({ ...state, [anchor]: open });
     };
 
-  const dispatch = useAppDispatch();
+  const onActivateBusiness = async () => {
+    setIsOpen((prevState) => !prevState);
+    console.log(isOpen)
+    postActivateBusiness(businessId);
+    dispatch(setBusinessStatus(isOpen));
+    await addSessionState({
+      enabled: !isOpen,
+    });
+    setSnackBarOpen(true);
+    console.log("activate business");
+  };
+  const onDeactivateBusiness = async () => {
+    setIsOpen((prevState) => !prevState);
+    console.log(isOpen)
+    postDeactivateBusiness(businessId);
+    dispatch(setBusinessStatus(isOpen));
+    await addSessionState({
+      enabled: !isOpen,
+    });
+    setSnackBarOpen(true);
+    console.log("deactivate business");
+  };
 
   const handleLogout = async () => {
-    // const sessionState = {
-    //   userId: "Huy Bui",
-    //   businessId: "Huy Dau Bui",
-    // };
-    // console.log("clear session state", sessionState);
     await clearSessionState();
     dispatch(clearSessionRedux());
+  };
+
+  const onCloseSnackBar = () => {
+    setSnackBarOpen(false);
   };
   const navItems = [
     {
@@ -177,9 +223,11 @@ export default function Header({ loginData }: any) {
 
               <Switch
                 checked={isOpen}
-                onChange={() => setIsOpen(!isOpen)}
+                {...(isOpen
+                  ? { onClick: onDeactivateBusiness }
+                  : { onClick: onActivateBusiness })}
                 sx={{ color: "black" }}
-                // onClick
+                {...(loading ? { disabled: true } : { disabled: false })}
               />
               <CircleIcon
                 sx={{
@@ -190,6 +238,26 @@ export default function Header({ loginData }: any) {
                 {...(isOpen ? { color: "success" } : { color: "warning" })}
               />
             </Box>
+            <Snackbar
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              open={snackBarOpen}
+              onClose={onCloseSnackBar}
+              autoHideDuration={3000}
+              {...(isOpen
+                ? { message: "Business is online" }
+                : { message: "Business is offline" })}
+              // key={vertical + horizontal}
+              sx={{
+                ".MuiSnackbar-anchorOriginTopRight": {
+                  marginBottom: 2,
+                  backgroundColor: "white",
+                },
+                "@media (min-width: 600px)": {
+                  top: "45px",
+                  right: "60px",
+                },
+              }}
+            />
           </Box>
         </Toolbar>
       </AppBar>

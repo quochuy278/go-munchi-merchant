@@ -137,6 +137,24 @@ export const munchiApi = createApi({
       }),
       providesTags: ["Order"],
     }),
+    postActivateBusiness: builder.mutation({
+      query: (publicBusinessId: string) => ({
+        url: `business/editBusiness/activate`,
+        method: "POST",
+        body: {
+          publicBusinessId: publicBusinessId,
+        },
+      }),
+    }),
+    postDeactivateBusiness: builder.mutation({
+      query: (publicBusinessId: string) => ({
+        url: `business/editBusiness/deactivate`,
+        method: "POST",
+        body: {
+          publicBusinessId: publicBusinessId,
+        },
+      }),
+    }),
   }),
 });
 
@@ -147,4 +165,6 @@ export const {
   useGetOrderByPublicIdQuery,
   useUpdateOrderMutation,
   useGetRefreshTokenQuery,
+  usePostActivateBusinessMutation,
+  usePostDeactivateBusinessMutation
 } = munchiApi;
