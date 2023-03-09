@@ -5,7 +5,7 @@ export const ProfilePage = () => {
   console.log('This is ProfilePage page')
   return (
     <CenterContainer>
-    <div>This Profile Page</div>
+    <div>No supported yet</div>
   </CenterContainer>
   )
 };

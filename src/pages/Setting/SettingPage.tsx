@@ -6,7 +6,7 @@ export const SettingPage = () => {
 
   return (
     <CenterContainer>
-      <div>This SettingPage</div>
+     <div>No supported yet</div>
     </CenterContainer>
   );
 };
