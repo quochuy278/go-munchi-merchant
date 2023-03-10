@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Box, Button, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import FactoryDialog from "../../Dialog/Dialog";
+import { Box, Button, IconButton, Typography } from "@mui/material";
+import { useState } from "react";
+import { useUpdateOrderMutation } from "../../../store/slices/api";
 import { OrderFooterProps } from "../../../types";
 
 const OrderPendingFooter = ({
@@ -9,8 +9,8 @@ const OrderPendingFooter = ({
   orderId,
   prepTime,
   deliveryType,
-  status,
 }: OrderFooterProps) => {
+  const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation();
   const [newPrepTime, setNewPrepTime] = useState(10);
   const presetPreparationTimes = [5, 10, 30];
   const setTimeHandler = (event: any, time: number) => {
@@ -18,13 +18,19 @@ const OrderPendingFooter = ({
     event.stopPropagation();
     setNewPrepTime(time);
   };
-  const [open, setOpen] = useState(false);
-  const onOpen = () => {
-    setOpen(true);
-  };
 
-  const onClose = () => {
-    setOpen(false);
+  const updateOrderHandler = async () => {
+    await updateOrder({
+      orderId: orderId,
+      orderStatus: 7,
+      newPrepTime: newPrepTime,
+    });
+  };
+  const onCancelOrder = async () => {
+    await updateOrder({
+      orderId: orderId,
+      orderStatus: 5,
+    });
   };
   return (
     <Box
@@ -135,6 +141,7 @@ const OrderPendingFooter = ({
           }}
           disableFocusRipple={true}
           disableTouchRipple={true}
+          onClick={onCancelOrder}
         >
           <CloseIcon sx={{ color: "#FF5F5F" }} />
         </IconButton>
@@ -143,28 +150,18 @@ const OrderPendingFooter = ({
       <Box gridColumn="span 2">
         <Button
           {...(newPrepTime ? { variant: "contained" } : { disabled: true })}
+          {...(isUpdating ? { disabled: true } : { disabled: false })}
           sx={{
             width: "calc(100% - 10px)",
             height: "54px",
             borderRadius: "8px",
             border: "none",
           }}
-          onClick={onOpen}
+          onClick={updateOrderHandler}
         >
           Accept
         </Button>
       </Box>
-      <FactoryDialog
-        isOrder={true}
-        open={open}
-        onClose={onClose}
-        modalData={{
-          deliveryType: deliveryType,
-          orderId: orderId,
-          status: orderStatus,
-          newPrepTime: newPrepTime,
-        }}
-      />
     </Box>
   );
 };

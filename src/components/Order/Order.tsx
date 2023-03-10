@@ -17,8 +17,8 @@ import { OrderModel } from "../../types";
 import OrderContainer from "../Container/OrderContainer";
 import OrderSection from "./OrderSection/OrderSection";
 export const pendingStatus: number[] = [0];
-export const acceptedStatus: number[] = [1, 3, 6, 7];
-export const completedStatus: number[] = [10, 11, 12, 13];
+export const acceptedStatus: number[] = [7, 8];
+export const completedStatus: number[] = [1, 4, 9, 11, 15];
 
 const Order = () => {
   const { businessId } = useAppSelector(selectSession);
@@ -36,6 +36,7 @@ const Order = () => {
   useEffect(() => {
     socket.emit("join", businessId);
     socket.on("receive-order", (socket) => {
+      console.log(socket);
       play();
       setOpen(true);
       setNewOrder(socket);

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type OrderModel = {
   id: number;
   status: number;
@@ -44,6 +46,8 @@ export interface OrderFooterProps {
   orderStatus: number;
   deliveryType: number;
   status: number;
+  createAt: string;
+  onOpen?: () => void
 }
 
 export interface BusinessData {
