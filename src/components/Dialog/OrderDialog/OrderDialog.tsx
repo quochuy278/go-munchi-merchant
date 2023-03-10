@@ -16,6 +16,7 @@ import { useState } from "react";
 import { boolean } from "zod";
 import { useUpdateOrderMutation } from "../../../store/slices/api";
 import { UpdateOrderData } from "../../../types";
+import { DeliveryEnum } from "../../../types/enum/enum";
 import { acceptedStatus, pendingStatus } from "../../Order/Order";
 import { OrderDialogProps } from "../Dialog";
 
@@ -117,19 +118,69 @@ const orderStatuses = [
     value: 23,
   },
 ];
+const StatusUponDeliveryType = (deliveryType: number) => {
+  let completedOption: Array<Object> = [];
+  switch (true) {
+    case deliveryType === DeliveryEnum.DELIVERY:
+      return (completedOption = [
+        {
+          status: "Delivery completed by driver",
+          value: 11,
+        },
+      ]);
+    case deliveryType === DeliveryEnum.PICK_UP:
+      return (completedOption = [
+        {
+          status: "Preparation Completed",
+          value: 4,
+        },
+      ]);
+    case deliveryType === DeliveryEnum.EATIN:
+      return (completedOption = [
+        {
+          status: "Completed",
+          value: 1,
+        },
+      ]);
+    case deliveryType === DeliveryEnum.DRIVER_THRU:
+      return (completedOption = [
+        {
+          status: "Delivery completed by driver",
+          value: 11,
+        },
+      ]);
+    case deliveryType === DeliveryEnum.CURBSIDE:
+      return (completedOption = [
+        {
+          status: "Delivery completed by driver",
+          value: 11,
+        },
+      ]);
+
+    default:
+      return (completedOption = [
+        {
+          status: "Delivery completed by driver",
+          value: 0,
+        },
+      ]);
+
+  }
+};
 const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
+  const completedOptions = StatusUponDeliveryType(modalData.deliveryType)
   const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation();
-  const [status, setStatus] = useState<number>(0);
+  const [status, setStatus] = useState<number>(completedOptions[0].value);
   const handleOrderStatusChange = (event: SelectChangeEvent<typeof status>) => {
     setStatus(event.target.value as number);
   };
-
+ 
   const onUpdateOrder = async (newOrderData: UpdateOrderData) => {
-    console.log("triggered");
+   
+    console.log(newOrderData)
     await updateOrder(newOrderData);
     onClose();
   };
-  console.log(modalData, "Order dialog");
   // console.log(modalData, "line 125");
   if (!modalData) {
     return (
@@ -140,41 +191,6 @@ const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
   }
 
   switch (true) {
-    case pendingStatus.includes(modalData.status):
-      return (
-        <Dialog open={open} fullWidth={true} maxWidth={"sm"}>
-          <DialogTitle>Confirmation</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Please confirm that you accept order
-            </DialogContentText>{" "}
-            <DialogContentText>
-              Your preparation time: {modalData.newPrepTime}
-            </DialogContentText>
-          </DialogContent>
-          {isUpdating ? (
-            <LinearProgress color="secondary" />
-          ) : (
-            <DialogActions>
-              <Button onClick={onClose}>Close</Button>
-              <Button
-                onClick={() =>
-                  onUpdateOrder({
-                    orderId: modalData.orderId,
-                    newPrepTime: modalData.newPrepTime,
-                    orderStatus: 7,
-                  })
-                }
-              >
-                Confirm
-              </Button>
-            </DialogActions>
-          )}
-
-          {/* <LinearProgress color="secondary" /> */}
-        </Dialog>
-      );
-
     case acceptedStatus.includes(modalData.status):
       return (
         <Dialog open={open} fullWidth={true} maxWidth={"sm"}>
@@ -208,7 +224,7 @@ const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
                   }}
                   autoWidth
                 >
-                  {orderStatuses.map((orderStatus, index: number) => {
+                  {completedOptions.map((orderStatus, index: number) => {
                     return (
                       <MenuItem value={orderStatus.value} key={index}>
                         {orderStatus.status}
@@ -228,7 +244,6 @@ const OrderDialog = ({ modalData, onClose, open }: OrderDialogProps) => {
                 onClick={() =>
                   onUpdateOrder({
                     orderId: modalData.orderId,
-                    newPrepTime: modalData.newPrepTime,
                     orderStatus: status,
                   })
                 }
