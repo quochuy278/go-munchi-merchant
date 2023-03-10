@@ -1,16 +1,17 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import React from "react";
+import moment from "moment";
 import { Link } from "react-router-dom";
 import { OrderModel } from "../../../types";
-import { IconFactory } from "../../Factory/icons/IconFactory";
-import OrderFactory from "../../Factory/Order/OrderFactory";
+import { IconFactory } from "../../Factory/Icons/IconFactory";
+import { OrderFooterFactory } from "../../Factory/OrderFooter/OrderFactory";
 import ProductFactory from "../../Factory/Product/ProductFactory";
-
 import styles from "./OrderItem.module.css";
 interface OrderProps {
   order: OrderModel;
 }
+// tu in progress chuyen qua ready luon luon la so 4
 const OrderItem = ({ order }: OrderProps) => {
+  const createdAt = moment(order.createdAt).format("HH:mm")
   return (
     <Box className={styles.main__card__container} key={order.id}>
       <Link
@@ -58,22 +59,23 @@ const OrderItem = ({ order }: OrderProps) => {
           <Typography
             textAlign="left"
             sx={{ color: "#707070" }}
-            fontSize="8px"
+            fontSize="12px"
             lineHeight="10px"
           >
-            Today at 6:30
+            Today at {createdAt}
           </Typography>
           <Box className={styles.card__item__container}>
             <ProductFactory product={order.products} orderId={order.id} />
           </Box>
         </Box>
       </Link>
-      <OrderFactory
+      <OrderFooterFactory
         orderStatus={order.status}
         orderId={order.id}
         deliveryType={order.deliveryType}
         prepTime={order.preparedIn}
         status={order.status}
+        createAt={order.createdAt}
       />
     </Box>
   );

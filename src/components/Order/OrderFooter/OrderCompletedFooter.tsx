@@ -46,17 +46,6 @@ const OrderCompletedFooter = ({
           Completed
         </Typography>
       </CustomReadyButton>
-      <FactoryDialog
-        isOrder={true}
-        open={open}
-        onClose={onClose}
-        modalData={{
-          deliveryType: deliveryType,
-          orderId: orderId,
-          status: orderStatus,
-          newPrepTime: 25 as number,
-        }}
-      />
     </>
   );
 };
