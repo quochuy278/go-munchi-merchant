@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { FactoryButtonContent } from "../../../../Factory/buttonContent/FactoryButtonContent";
 import CountDownClock from "../../../../CountDownClock/CountDownClock";
+import { FactoryButtonContent } from "../../../../Factory/ButtonContent/FactoryButtonContent";
 export interface DetailFooterProps {
   timeStamp: string;
   orderStatus: number;
