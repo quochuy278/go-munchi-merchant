@@ -1,0 +1,24 @@
+.payment_container {
+  padding: 10px;
+  border-radius: 12px;
+  width: 100%;
+  height: 100px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.payment_title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.payment_content {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+}
+
