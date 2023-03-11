@@ -1,0 +1,10 @@
+.detail__info {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+.detail__info__bar {
+  display: flex;
+  padding: 10px;
+  padding-top: 15px;
+}
