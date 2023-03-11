@@ -1,20 +1,19 @@
+import styles from "./OrderDetailCustomerInfo.module.css";
 import { Box, Typography } from "@mui/material";
-import { Summary } from "../../../../../types";
-import { IconFactory } from "../../../../Factory/Icons/IconFactory";
-import styles from "./OrderDetailBoardRightList.module.css";
-
-interface OrderDetailRightListProps {
+import { IconFactory } from "../../Factory/Icons/IconFactory";
+interface OrderDetailCustomerInfoProps {
   name: string;
   deliveryType: number;
 }
-const OrderDetailBoardRightList = ({
+const OrderDetailCustomerInfo = ({
   name,
   deliveryType,
-}: OrderDetailRightListProps) => {
+}: OrderDetailCustomerInfoProps) => {
+  console.log("Order detail customer info", deliveryType);
   return (
     <Box className={styles.detail__info}>
       <Box className={styles.detail__info__bar}>
-        <Box sx={{ marginX: "10px" }}>
+        <Box sx={{}}>
           <Typography fontSize="10px" lineHeight="13px">
             Customer
           </Typography>
@@ -50,11 +49,11 @@ const OrderDetailBoardRightList = ({
         </IconButton> */}
       </Box>
 
-      <Box sx={{ padding: "20px" }}>
+      <Box sx={{ paddingBottom: "15px" }}>
         <IconFactory deliveryType={deliveryType} />
       </Box>
     </Box>
   );
 };
 
-export default OrderDetailBoardRightList;
+export default OrderDetailCustomerInfo;

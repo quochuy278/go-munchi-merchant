@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BusinessList from "../../components/Business/BusinessList";
 import FullscreenLoading from "../../components/Loading/FullscreenLoading";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { useGetBusinessQuery } from "../../store/slices/api";
 import { selectSession } from "../../store/slices/session";
 import styles from "./BusinessPage.module.css";
@@ -12,7 +12,6 @@ import styles from "./BusinessPage.module.css";
 const BusinessPage = () => {
   const { businessId, publicUserId } = useAppSelector(selectSession);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const { data, isFetching, isLoading, error, isError } =
     useGetBusinessQuery(publicUserId);
   useEffect(() => {
@@ -21,6 +20,9 @@ const BusinessPage = () => {
       navigate("/", { replace: true });
     }
   }, [businessId, navigate]);
+  if (error || isError) {
+    navigate("/error-page", { replace: true });
+  }
   if (isLoading || isFetching) {
     return <FullscreenLoading />;
   }

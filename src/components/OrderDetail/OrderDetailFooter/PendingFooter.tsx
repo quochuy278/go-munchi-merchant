@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import { Box, Typography, TextField, Button } from "@mui/material";
-import styles from "./DetailFooter.module.css";
-import FactoryDialog from "../../../../Dialog/Dialog";
-export interface DetailFooterProps {
-  timeStamp: string;
-  orderStatus: number;
-  deliveryType: number;
-  orderId: number;
-}
+import { DetailFooterProps } from "../../../types";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  LinearProgress,
+} from "@mui/material";
+import styles from "./OrderDetailFooter.module.css";
+import { useUpdateOrderMutation } from "../../../store/slices/api";
 const timeAvailable = [1, 5, 10, 15, 20, 30];
-const DetailPendingFooter = ({
-  orderStatus,
-  timeStamp,
-  orderId,
-  deliveryType,
-}: DetailFooterProps) => {
+export const PendingFooter = ({ timeStamp, orderId }: DetailFooterProps) => {
+  const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation();
   const [inputVisible, setInputVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [newPrepTime, setNewPrepTime] = useState(10);
@@ -31,14 +28,14 @@ const DetailPendingFooter = ({
       setNewPrepTime(event.target.value);
     }
   };
-
-  const onOpen = () => {
-    setOpen(true);
+  const updateOrderHandler = async () => {
+    await updateOrder({
+      orderId: orderId,
+      orderStatus: 7,
+      newPrepTime: newPrepTime,
+    });
   };
 
-  const onClose = () => {
-    setOpen(false);
-  };
   return (
     <>
       <Box className={styles.detail__time__info}>
@@ -230,25 +227,13 @@ const DetailPendingFooter = ({
                 color: "white",
               },
             }}
-            onClick={onOpen}
+            onClick={updateOrderHandler}
           >
             <Typography>Accept</Typography>
           </Button>
-          <FactoryDialog
-            isOrder={true}
-            open={open}
-            onClose={onClose}
-            modalData={{
-              deliveryType: deliveryType,
-              orderId: orderId,
-              status: orderStatus,
-              newPrepTime: newPrepTime,
-            }}
-          />
         </Box>
       </Box>
+      {isUpdating ? <LinearProgress color="secondary" /> : null}
     </>
   );
 };
-
-export default DetailPendingFooter;

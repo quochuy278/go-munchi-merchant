@@ -1,4 +1,4 @@
-import { literal, object, string, TypeOf } from 'zod';
+import { object, string } from 'zod';
 
 export const signInSchema = object({
   email: string().email('Email is invalid'),

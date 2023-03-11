@@ -1,3 +1,7 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {
   Avatar,
   Button,
@@ -8,22 +12,17 @@ import {
   IconButton,
   Link,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import React, { useState } from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { setSessionState } from "../../utils/preference";
-import { useAppDispatch } from "../../store/hooks";
-import { setSessionState as setReduxSessionState } from "../../store/slices/session";
-import { useNavigate } from "react-router-dom";
-import { SignInData, useSignInMutation } from "../../store/slices/api";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { signInSchema } from "../../utils/validateSchema";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { TypeOf } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useAppDispatch } from "../../store/hooks";
+import { useSignInMutation } from "../../store/slices/api";
+import { setSessionState as setReduxSessionState } from "../../store/slices/session";
+import { setSessionState } from "../../utils/preference";
+import { signInSchema } from "../../utils/validateSchema";
 import Notification from "../Notification/Notification";
 type SignInInput = TypeOf<typeof signInSchema>;
 const LoginForm = () => {

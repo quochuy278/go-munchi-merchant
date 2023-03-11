@@ -1,14 +1,13 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import React from "react";
-import { Summary } from "../../../../../types";
-import styles from "./LeftBoardFooter.module.css";
-
+import { Box, Typography } from '@mui/material';
+import React from 'react'
+import { Summary } from '../../../types';
+import styles from "./OrderDetailSummary.module.css";
 interface FooterProps {
-  summary: Summary;
-}
+    summary: Summary;
+  }
+  
 
-export const LeftBoardFooter = ({ summary }: FooterProps) => {
+const OrderDetailSummary = ({ summary }: FooterProps) => {
   return (
     <Box className={styles.payment_content}>
       <Box sx={{ width: "100%" }}>
@@ -54,5 +53,7 @@ export const LeftBoardFooter = ({ summary }: FooterProps) => {
         </Box>
       </Box>
     </Box>
-  );
-};
+  )
+}
+
+export default OrderDetailSummary

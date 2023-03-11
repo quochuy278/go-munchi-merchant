@@ -1,16 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
-import CountDownClock from "../../../../CountDownClock/CountDownClock";
-import { FactoryButtonContent } from "../../../../Factory/ButtonContent/FactoryButtonContent";
-export interface DetailFooterProps {
-  timeStamp: string;
-  orderStatus: number;
-  deliveryType: number;
-  orderId: number;
-  preparedIn:number
-}
-
-const DetailCompletedFooter = ({
+import CountDownClock from "../../CountDownClock/CountDownClock";
+import { FactoryButtonContent } from "../../Factory/ButtonContent/FactoryButtonContent";
+import { DetailFooterProps } from "../../../types";
+export const CompletedFooter = ({
   orderStatus,
   timeStamp,
   orderId,
@@ -27,7 +20,7 @@ const DetailCompletedFooter = ({
     setOpen(false);
   };
 
-  const omClose = () => {
+  const onClose = () => {
     setOpen(true);
   };
   return (
@@ -102,21 +95,10 @@ const DetailCompletedFooter = ({
             sx={{ width: "100%", height: "100%", borderRadius: "8px" }}
             onClick={onOpen}
           >
-            <FactoryButtonContent deliveryType={deliveryType} />
+            <FactoryButtonContent orderStatus={orderStatus} />
           </Button>
         </Box>
-        {/* <DialogAlert
-          open={open}
-          newPrepTime={newPrepTime}
-          onClose={acceptDialogCloseHandler}
-          orderId={orderId}
-          deliveryType={deliveryType}
-          orderStatus={orderStatus}
-          prepTime={newPrepTime}
-        /> */}
       </Box>
     </Box>
   );
 };
-
-export default DetailCompletedFooter;

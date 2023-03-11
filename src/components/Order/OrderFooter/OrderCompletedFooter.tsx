@@ -1,8 +1,7 @@
-import { Typography, Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import { useState } from "react";
 import { OrderFooterProps } from "../../../types";
-import FactoryDialog from "../../Dialog/Dialog";
 const CustomReadyButton = styled(Button)(({ theme }) => ({
   textAlign: "center",
   marginTop: "15px",
@@ -31,13 +30,6 @@ const OrderCompletedFooter = ({
   deliveryType,
   status
 }: OrderFooterProps) => {
-  const [open, setOpen] = useState(false);
-  const acceptHandler = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
   return (
     <>
       {" "}

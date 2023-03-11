@@ -11,7 +11,7 @@ interface OrderProps {
 }
 // tu in progress chuyen qua ready luon luon la so 4
 const OrderItem = ({ order }: OrderProps) => {
-  const createdAt = moment(order.createdAt).format("HH:mm")
+  const createdAt = moment(order.createdAt).format("HH:mm");
   return (
     <Box className={styles.main__card__container} key={order.id}>
       <Link
@@ -52,7 +52,7 @@ const OrderItem = ({ order }: OrderProps) => {
                   opacity: 1,
                 }}
               >
-                <IconFactory orderType={order.deliveryType} />
+                <IconFactory deliveryType={order.deliveryType}/>
               </IconButton>
             </Box>
           </Box>
