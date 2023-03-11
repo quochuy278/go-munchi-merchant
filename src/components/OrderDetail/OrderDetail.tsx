@@ -1,12 +1,10 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetOrderByPublicIdQuery } from "../../store/slices/api";
-import CenterContainer from "../Container/CenterContainer";
 import DetailContainer from "../Container/DetailContainer";
 import FullscreenLoading from "../Loading/FullscreenLoading";
+import { OrderDetailAction } from "./OrderDetailAction/OrderDetailAction";
 import { OrderDetailBoard } from "./OrderDetailBoard/OrderDetailBoard";
-import OrderDetailBoardLeft from "./OrderDetailBoard/OrderDetailBoardLeft/OrderDetailBoardLeft";
-import { OrderDetailBoardRight } from "./OrderDetailBoard/OrderDetailBoardRight/OrderDetailBoardRight";
+import OrderDetailSection from "./OrderDetailSection/OrderDetailSection";
 
 import { OrderDetailTitle } from "./OrderDetailTitle/OrderDetailTitle";
 
@@ -21,10 +19,11 @@ export const OrderDetail = () => {
   return (
     <DetailContainer>
       <OrderDetailTitle orderId={data.id} />
-      <OrderDetailBoard>
-        <OrderDetailBoardLeft data={data} />
-        <OrderDetailBoardRight data={data} />
-      </OrderDetailBoard>
+      <OrderDetailSection>
+        <OrderDetailBoard data={data}/>
+        <OrderDetailAction data={data}/>
+      </OrderDetailSection>
+    
     </DetailContainer>
   );
 };
