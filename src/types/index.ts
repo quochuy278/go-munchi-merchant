@@ -47,10 +47,19 @@ export interface OrderFooterProps {
   deliveryType: number;
   status: number;
   createAt: string;
-  onOpen?: () => void
+  onOpen?: () => void;
 }
 
 export interface BusinessData {
   businessId: string;
   businessName: string;
+}
+
+export interface DetailFooterProps {
+  orderStatus: number;
+  timeStamp: string;
+  orderId: number;
+  deliveryType: number;
+  preparedIn: number;
+  onOpen?: () => void;
 }
