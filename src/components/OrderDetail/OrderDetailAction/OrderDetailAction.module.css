@@ -1,0 +1,17 @@
+.detail__info__container {
+    height: calc(100vh - 150px);
+    border-radius: 12px;
+    overflow: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .detail__time__section {
+    background-color: white;
+    width: 100%;
+    height: 60%;
+    border-radius: 12px;
+    overflow: visible;
+  }
