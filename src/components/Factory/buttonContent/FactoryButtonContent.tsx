@@ -1,13 +1,13 @@
 import { DeliveryEnum } from "../../../types/enum/enum";
 import { Typography } from "@mui/material";
 interface FactoryProps {
-  deliveryType: number;
+  orderStatus: number;
 }
-export const FactoryButtonContent = ({ deliveryType }: FactoryProps) => {
+export const FactoryButtonContent = ({ orderStatus }: FactoryProps) => {
   // const deliveryReadyHandler = () => {}
   // const pickupReadyHandler = () => {}
   // const readyReadyHandler = () => {}
-  switch (deliveryType) {
+  switch (orderStatus) {
     case DeliveryEnum.DELIVERY:
       return (
         // delivery
