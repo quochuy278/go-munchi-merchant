@@ -1,25 +1,29 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
 
 const useCountdown = (targetDate: number) => {
-  const countDownDate = new Date(targetDate).getTime();
-
-  const [countDown, setCountDown] = useState(
-    countDownDate - new Date().getTime()
+  console.log(targetDate)
+  const now = moment().format("X");
+  const [countDown, setCountDown] = useState<number>(
+    Math.abs(targetDate - parseInt(now))
   );
-
+  console.log(countDown)
+  var duration: any = moment.duration(countDown * 1000, "milliseconds");
   useEffect(() => {
     const interval = setInterval(() => {
-      setCountDown(countDownDate - new Date().getTime());
+      duration = moment.duration(duration - 1000, "milliseconds");
+      setCountDown(duration);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [countDownDate]);
+  }, [targetDate]);
 
   return getReturnValues(countDown);
 };
 
 const getReturnValues = (countDown: number) => {
   // calculate time left
+
   const days = Math.floor(countDown / (1000 * 60 * 60 * 24));
   const hours = Math.floor(
     (countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
