@@ -22,18 +22,18 @@ const CustomReadyButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-
 const OrderCompletedFooter = ({
   orderStatus,
   orderId,
   prepTime,
   deliveryType,
-  status
+  status,
+  onOpen,
 }: OrderFooterProps) => {
   return (
     <>
       {" "}
-      <CustomReadyButton variant="contained" onClick={acceptHandler}>
+      <CustomReadyButton variant="contained" onClick={onOpen}>
         <Typography sx={{ color: "white", opacity: 0.98 }} fontSize="13px">
           Completed
         </Typography>

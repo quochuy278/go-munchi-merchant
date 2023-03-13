@@ -32,14 +32,10 @@ const OrderAcceptedFooter = ({
   createAt,
   onOpen,
 }: OrderFooterProps) => {
-  const now = moment().format();
-  const orderFinishedTime = moment(createAt).add(prepTime, "minutes");
-  const orderCreatedAt = moment(orderFinishedTime).diff(now);
-  const time = moment(orderCreatedAt).format("HH:mm:ss")
-  const prepTimeInMs = prepTime * 60 * 1000;
-  const nowInMs = new Date().getTime();
-
-  const dateTimeAfterPrepTime = prepTimeInMs + nowInMs;
+  const now = moment().format("X");
+  const orderFinishedTime = moment(createAt)
+    .add(prepTime, "minutes")
+    .format("X");
 
   return (
     <Box
@@ -48,7 +44,7 @@ const OrderAcceptedFooter = ({
       alignItems="center"
       sx={{ marginTop: "15px" }}
     >
-      <CountDownClock targetDate={dateTimeAfterPrepTime} />
+      <CountDownClock targetDate={parseInt(orderFinishedTime)} />
       <CustomAcceptedButton variant="contained" onClick={onOpen}>
         <Typography sx={{ color: "white", opacity: 0.98 }} fontSize="13px">
           Accepted
