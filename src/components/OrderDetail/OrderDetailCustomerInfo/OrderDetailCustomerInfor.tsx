@@ -1,6 +1,7 @@
 import styles from "./OrderDetailCustomerInfo.module.css";
 import { Box, Typography } from "@mui/material";
-import { IconFactory } from "../../Factory/Icons/IconFactory";
+import { IconFactory } from "../../Factory/icons/IconFactory";
+
 interface OrderDetailCustomerInfoProps {
   name: string;
   deliveryType: number;

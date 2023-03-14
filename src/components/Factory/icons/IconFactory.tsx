@@ -5,7 +5,6 @@ import TakeoutDiningOutlinedIcon from "@mui/icons-material/TakeoutDiningOutlined
 import { DeliveryEnum } from "../../../types/enum/enum";
 
 export const IconFactory = ({ deliveryType }: any) => {
-  console.log('Icon factory', deliveryType)
   switch (deliveryType) {
     case DeliveryEnum.DELIVERY:
       return (

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+
 import { Box, Typography, Button } from "@mui/material";
 import { DetailFooterProps } from "../../../types";
 import CountDownClock from "../../CountDownClock/CountDownClock";
-import { FactoryButtonContent } from "../../Factory/ButtonContent/FactoryButtonContent";
+import { FactoryButtonContent } from "../../Factory/buttonContent/FactoryButtonContent";
+
+
 export const AcceptedFooter = ({
   orderStatus,
   timeStamp,
