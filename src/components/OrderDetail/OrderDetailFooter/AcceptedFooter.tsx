@@ -1,21 +1,22 @@
-
 import { Box, Typography, Button } from "@mui/material";
+import moment from "moment";
 import { DetailFooterProps } from "../../../types";
 import CountDownClock from "../../CountDownClock/CountDownClock";
 import { FactoryButtonContent } from "../../Factory/buttonContent/FactoryButtonContent";
 
-
 export const AcceptedFooter = ({
   orderStatus,
-  timeStamp,
+  createdAt,
   orderId,
   deliveryType,
   preparedIn,
   onOpen,
 }: DetailFooterProps) => {
-  const prepTimeInMs = preparedIn * 60 * 1000;
-  const nowInMs = new Date().getTime();
-  const dateTimeAfterPrepTime = prepTimeInMs + nowInMs;
+  console.log(createdAt , preparedIn)
+  const orderFinishedTime = moment(createdAt)
+    .add(preparedIn, "minutes")
+    .format("X");
+
   return (
     <Box
       display="flex"
@@ -31,7 +32,7 @@ export const AcceptedFooter = ({
             Create at
           </Typography>
           <Typography fontSize="10px" lineHeight="13px">
-            15:41
+            {moment(createdAt).format("HH:mm")}
           </Typography>
         </Box>
         <Box sx={{ marginY: "20px" }}>
@@ -80,7 +81,7 @@ export const AcceptedFooter = ({
           borderRadius="8px"
           marginBottom="10px"
         >
-          <CountDownClock targetDate={dateTimeAfterPrepTime} />
+          <CountDownClock targetDate={parseInt(orderFinishedTime)} />
         </Box>
         <Box width="100%" height="30%">
           <Button
