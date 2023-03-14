@@ -2,9 +2,12 @@ import { Box, IconButton, Typography } from "@mui/material";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { OrderModel } from "../../../types";
-import { IconFactory } from "../../Factory/Icons/IconFactory";
+import { IconFactory } from "../../Factory/icons/IconFactory";
+
+
 import { OrderFooterFactory } from "../../Factory/OrderFooter/OrderFactory";
-import ProductFactory from "../../Factory/Product/ProductFactory";
+import ProductFactory from "../../Factory/product/ProductFactory";
+
 import styles from "./OrderItem.module.css";
 interface OrderProps {
   order: OrderModel;

@@ -1,5 +1,6 @@
 import { useCountdown } from "../../hooks/useCountDown";
-import { TimeFormatFactory } from "../Factory/Time/TimeFormatFactory";
+import { TimeFormatFactory } from "../Factory/time/TimeFormatFactory";
+
 
 interface ClockProps {
   targetDate: number;

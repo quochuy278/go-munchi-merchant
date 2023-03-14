@@ -8,3 +8,21 @@
   display: none;
 }
 /* #E8EAEE; */
+.dialog__content__container{
+  display: flex;
+  flex-direction: column;
+}
+.dialog__content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dialog__content__product{
+  width: 50%;
+}
+
+.dialog__content__summary{
+  margin-top: 10px;
+  width: 100%;
+
+}
