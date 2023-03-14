@@ -14,6 +14,7 @@ interface OrderSectionProps {
   isCompleted: boolean;
   span: number;
   title: string;
+  refetch: boolean;
 }
 
 const OrderSection = ({
@@ -21,6 +22,7 @@ const OrderSection = ({
   isCompleted,
   span,
   title,
+  refetch,
 }: OrderSectionProps) => {
   const { businessId } = useAppSelector(selectSession);
   const filterData: FilterQuery = {
@@ -40,8 +42,17 @@ const OrderSection = ({
       "created_at",
     ].join(","),
   };
-  const { data, isFetching, isLoading, isError, error } =
-    useGetFilteredOrderQuery(filterData);
+  const {
+    data,
+    isFetching,
+    isLoading,
+    isError,
+    error,
+    refetch: RefetchOrder,
+  } = useGetFilteredOrderQuery(filterData);
+  if (refetch) {
+    RefetchOrder();
+  }
   if (isFetching || isLoading) {
     return (
       <Box gridColumn={`span ${span}`} className={styles.section__container}>
@@ -50,7 +61,7 @@ const OrderSection = ({
     );
   }
   if (error || isError) {
-    console.log(error)
+    console.log(error);
     return (
       <Box gridColumn={`span ${span}`} className={styles.section__container}>
         <CenterContainer>
