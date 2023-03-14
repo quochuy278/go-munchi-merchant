@@ -14,12 +14,12 @@ import OrderPendingFooter from "../../Order/OrderFooter/OrderPendingFooter";
 export const OrderFooterFactory = ({
   orderStatus,
   orderId,
-  prepTime,
+  preparedIn,
   deliveryType,
   status,
-  createAt,
+  createdAt,
 }: OrderFooterProps) => {
-  console.log(prepTime);
+  console.log(preparedIn);
   const [open, setOpen] = useState(false);
   const onOpen = () => {
     setOpen(true);
@@ -36,10 +36,10 @@ export const OrderFooterFactory = ({
         <OrderPendingFooter
           orderStatus={orderStatus}
           orderId={orderId}
-          prepTime={prepTime}
+          preparedIn={preparedIn}
           deliveryType={deliveryType}
           status={status}
-          createAt={createAt}
+          createdAt={createdAt}
           onOpen={onOpen}
         />
       );
@@ -49,10 +49,10 @@ export const OrderFooterFactory = ({
         <OrderAcceptedFooter
           orderStatus={orderStatus}
           orderId={orderId}
-          prepTime={prepTime}
+          preparedIn={preparedIn}
           deliveryType={deliveryType}
           status={status}
-          createAt={createAt}
+          createdAt={createdAt}
           onOpen={onOpen}
         />
       );
@@ -63,9 +63,9 @@ export const OrderFooterFactory = ({
           orderStatus={orderStatus}
           orderId={orderId}
           deliveryType={deliveryType}
-          prepTime={prepTime}
+          preparedIn={preparedIn}
           status={status}
-          createAt={createAt}
+          createdAt={createdAt}
           onOpen={onOpen}
         />
       );

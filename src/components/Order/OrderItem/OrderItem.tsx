@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { OrderModel } from "../../../types";
 import { IconFactory } from "../../Factory/icons/IconFactory";
 
-
 import { OrderFooterFactory } from "../../Factory/OrderFooter/OrderFactory";
 import ProductFactory from "../../Factory/product/ProductFactory";
 
@@ -55,7 +54,7 @@ const OrderItem = ({ order }: OrderProps) => {
                   opacity: 1,
                 }}
               >
-                <IconFactory deliveryType={order.deliveryType}/>
+                <IconFactory deliveryType={order.deliveryType} />
               </IconButton>
             </Box>
           </Box>
@@ -76,9 +75,9 @@ const OrderItem = ({ order }: OrderProps) => {
         orderStatus={order.status}
         orderId={order.id}
         deliveryType={order.deliveryType}
-        prepTime={order.preparedIn}
+        preparedIn={order.preparedIn}
         status={order.status}
-        createAt={order.createdAt}
+        createdAt={order.createdAt}
       />
     </Box>
   );

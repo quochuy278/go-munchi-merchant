@@ -2,12 +2,12 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 
 const useCountdown = (targetDate: number) => {
-  console.log(targetDate)
+ 
   const now = moment().format("X");
   const [countDown, setCountDown] = useState<number>(
     Math.abs(targetDate - parseInt(now))
   );
-  console.log(countDown)
+ 
   var duration: any = moment.duration(countDown * 1000, "milliseconds");
   useEffect(() => {
     const interval = setInterval(() => {

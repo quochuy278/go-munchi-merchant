@@ -25,7 +25,7 @@ const CustomReadyButton = styled(Button)(({ theme }) => ({
 const OrderCompletedFooter = ({
   orderStatus,
   orderId,
-  prepTime,
+  preparedIn,
   deliveryType,
   status,
   onOpen,

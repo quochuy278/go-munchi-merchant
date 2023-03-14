@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 import styles from "./OrderDetailFooter.module.css";
 import { useUpdateOrderMutation } from "../../../store/slices/api";
+import moment from "moment";
 const timeAvailable = [1, 5, 10, 15, 20, 30];
-export const PendingFooter = ({ timeStamp, orderId }: DetailFooterProps) => {
+export const PendingFooter = ({ createdAt, orderId }: DetailFooterProps) => {
   const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation();
   const [inputVisible, setInputVisible] = useState(false);
   const [open, setOpen] = useState(false);
@@ -40,7 +41,7 @@ export const PendingFooter = ({ timeStamp, orderId }: DetailFooterProps) => {
     <>
       <Box className={styles.detail__time__info}>
         <Typography fontSize="10px" lineHeight="13px" fontWeight={500}>
-          Create at {timeStamp}
+          Create at {moment(createdAt).format("DD:MM:YYYY HH:mm:ss")}
         </Typography>
       </Box>
 

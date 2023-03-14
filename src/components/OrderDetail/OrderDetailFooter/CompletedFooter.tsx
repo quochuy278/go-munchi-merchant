@@ -6,7 +6,7 @@ import { DetailFooterProps } from "../../../types";
 import { FactoryButtonContent } from "../../Factory/buttonContent/FactoryButtonContent";
 export const CompletedFooter = ({
   orderStatus,
-  timeStamp,
+  createdAt,
   orderId,
   deliveryType,
   preparedIn,
