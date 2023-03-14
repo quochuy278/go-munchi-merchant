@@ -21,7 +21,7 @@ export const OrderDetailAction = ({ data }: any) => {
       />
       <Box className={styles.detail__time__section}>
         <OrderFooterDetailFactory
-          timeStamp={createdAt}
+          createdAt={createdAt}
           orderStatus={status}
           deliveryType={deliveryType}
           orderId={id}

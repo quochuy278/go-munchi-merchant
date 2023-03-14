@@ -41,12 +41,12 @@ export interface UpdateOrderData {
 }
 
 export interface OrderFooterProps {
-  prepTime: number;
+  preparedIn: number;
   orderId: number;
   orderStatus: number;
   deliveryType: number;
   status: number;
-  createAt: string;
+  createdAt: string;
   onOpen?: () => void;
 }
 
@@ -57,7 +57,7 @@ export interface BusinessData {
 
 export interface DetailFooterProps {
   orderStatus: number;
-  timeStamp: string;
+  createdAt: string;
   orderId: number;
   deliveryType: number;
   preparedIn: number;

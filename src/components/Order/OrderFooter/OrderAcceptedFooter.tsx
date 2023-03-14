@@ -26,15 +26,15 @@ const CustomAcceptedButton = styled(Button)(({ theme }) => ({
 const OrderAcceptedFooter = ({
   orderStatus,
   orderId,
-  prepTime,
+  preparedIn,
   deliveryType,
   status,
-  createAt,
+  createdAt,
   onOpen,
 }: OrderFooterProps) => {
-  const now = moment().format("X");
-  const orderFinishedTime = moment(createAt)
-    .add(prepTime, "minutes")
+  console.log(createdAt , preparedIn)
+  const orderFinishedTime = moment(createdAt)
+    .add(preparedIn, "minutes")
     .format("X");
 
   return (

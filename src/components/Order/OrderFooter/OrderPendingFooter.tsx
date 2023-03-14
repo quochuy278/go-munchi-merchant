@@ -7,7 +7,7 @@ import { OrderFooterProps } from "../../../types";
 const OrderPendingFooter = ({
   orderStatus,
   orderId,
-  prepTime,
+  preparedIn,
   deliveryType,
 }: OrderFooterProps) => {
   const [updateOrder, { isLoading: isUpdating }] = useUpdateOrderMutation();

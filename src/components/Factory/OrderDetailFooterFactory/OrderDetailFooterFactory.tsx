@@ -14,7 +14,7 @@ import FactoryDialog from "../../Dialog/Dialog";
 import CenterContainer from "../../Container/CenterContainer";
 
 interface OrderDetailFooterFactoryProps {
-  timeStamp: string;
+  createdAt: string;
   orderStatus: number;
   deliveryType: number;
   orderId: number;
@@ -22,7 +22,7 @@ interface OrderDetailFooterFactoryProps {
 }
 
 const OrderDetailFooterFactory = ({
-  timeStamp,
+  createdAt,
   orderStatus,
   deliveryType,
   orderId,
@@ -43,7 +43,7 @@ const OrderDetailFooterFactory = ({
         <Box className={styles.detail_footer_container}>
           <DetailPendingFooter
             preparedIn={preparedIn}
-            timeStamp={timeStamp}
+            createdAt={createdAt}
             deliveryType={deliveryType}
             orderStatus={orderStatus}
             orderId={orderId}
@@ -55,7 +55,7 @@ const OrderDetailFooterFactory = ({
       OrderDetailFooter = (
         <Box className={styles.detail_footer_container}>
           <DetailAcceptedFooter
-            timeStamp={timeStamp}
+            createdAt={createdAt}
             deliveryType={deliveryType}
             orderStatus={orderStatus}
             orderId={orderId}
@@ -69,7 +69,7 @@ const OrderDetailFooterFactory = ({
       OrderDetailFooter = (
         <Box className={styles.detail_footer_container}>
           <DetailCompletedFooter
-            timeStamp={timeStamp}
+            createdAt={createdAt}
             deliveryType={deliveryType}
             orderStatus={orderStatus}
             orderId={orderId}
